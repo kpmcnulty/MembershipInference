@@ -1,30 +1,95 @@
+import torch
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+import torch.nn as nn
+import torch.optim as optim
+import flwr as fl
+from torchvision import datasets, transforms
+
+# Load dataset
 dataset = np.load("./texas100.npz")
-features= dataset['features']
-labels = dataset['labels'] #onehot encoded
-class Aggregator:
-    def __init__(self, model_structure):
-        self.model = model_structure
+features = dataset['features']
+labels = dataset['labels']  # onehot encoded
+num_participants = 5
 
-    def initialize_model(self):
-        self.model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+local_datasets = []
+for i in range(num_participants):
+    start_index = int(i * (features.shape[0] / num_participants))
+    end_index = int((i + 1) * (features.shape[0] / num_participants))
+    local_datasets.append((features[start_index:end_index], labels[start_index:end_index]))
 
-    def update_model(self, global_weights):
-        self.model.set_weights(global_weights)
+# Define the model based on the 5.2 target model
+model = torch.nn.Sequential(
+    torch.nn.Linear(67330, 1024),
+    torch.nn.ReLU(),
+    torch.nn.Linear(1024, 512),
+    torch.nn.ReLU(),
+    torch.nn.Linear(512, 256),
+    torch.nn.ReLU(),
+    torch.nn.Linear(256, 100),
+    torch.nn.Softmax(dim=1)
+)
 
+# Define Flower client using PyTorch
+class FlowerClient(fl.client.NumPyClient):
+    def __init__(self, model, train_data):
+        self.model = model
+        self.train_data = train_data
+        self.criterion = nn.CrossEntropyLoss()
+        self.optimizer = optim.SGD(self.model.parameters(), lr=0.01)
 
-class Participant:
-    def __init__(self, local_dataset):
-        self.local_dataset = local_dataset
-        self.model = Sequential()
-        self.model.add(Dense(128, activation='relu', input_shape=(784,)))  # Adjust input shape as needed
-        self.model.add(Dense(10, activation='softmax'))
+    def get_parameters(self):
+        return [val.cpu().numpy() for val in self.model.parameters()]
 
-    def train_local_model(self, num_epochs):
-        self.model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-        self.model.fit(self.local_dataset[0], self.local_dataset[1], epochs=num_epochs, batch_size=32)
+    def set_parameters(self, parameters):
+        for param, val in zip(self.model.parameters(), parameters):
+            param.data = torch.tensor(val).float()
 
-    def get_weights(self):
-        return self.model.get_weights()
+    def fit(self, parameters, config):
+        self.set_parameters(parameters)
+        self.model.train()
+
+        X_train, y_train = self.train_data
+        X_train = torch.tensor(X_train, dtype=torch.float32)
+        y_train = torch.tensor(y_train, dtype=torch.float32)
+
+        # Training loop
+        self.optimizer.zero_grad()
+        outputs = self.model(X_train)
+        loss = self.criterion(outputs, y_train.argmax(dim=1))  # Convert one-hot to class labels
+        loss.backward()
+        self.optimizer.step()
+
+        return self.get_parameters(), len(X_train), {}
+
+    def evaluate(self, parameters, config):
+        self.set_parameters(parameters)
+        self.model.eval()
+
+        X_test, y_test = self.train_data
+        X_test = torch.tensor(X_test, dtype=torch.float32)
+        y_test = torch.tensor(y_test, dtype=torch.float32)
+
+        with torch.no_grad():
+            outputs = self.model(X_test)
+            loss = self.criterion(outputs, y_test.argmax(dim=1))  # Convert one-hot to class labels
+            accuracy = (outputs.argmax(dim=1) == y_test.argmax(dim=1)).float().mean().item()
+
+        return float(loss), len(X_test), {"accuracy": accuracy}
+
+# Start Flower client
+def start_federated_learning():
+    clients = []
+    for i in range(num_participants):
+        train_data = local_datasets[i]
+        clients.append(FlowerClient(model, train_data))
+
+    # Start Flower client
+    fl.client.start_client(
+        server_address="localhost:8080",
+        client=clients[0]  # For now, we only start one client for testing
+    )
+
+# Entry point
+if __name__ == "__main__":
+    start_federated_learning()
+
