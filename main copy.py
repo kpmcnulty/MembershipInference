@@ -32,11 +32,11 @@ class Texas100Dataset(torch.utils.data.Dataset):
         return self.features[idx], self.labels[idx]
 
 
-subset_percentage = 0.1  # 20% of the data
+subset_percentage = 0.7  # 20% of the data
 num_samples = int(len(features) * subset_percentage)
 subset_features = features[:num_samples]
 subset_labels = labels[:num_samples]
-client_data_splits = np.array_split(range(len(subset_features)), 4)
+client_data_splits = np.array_split(range(len(subset_features)), 5)
 
 # Define Flower Client
 class FlowerClient(fl.client.NumPyClient):
@@ -97,9 +97,9 @@ def client_fn(cid: str):
 
 # Start Flower Simulation
 fl.simulation.start_simulation(
-    ray_init_args={"num_cpus": 8, "num_gpus": 1},
+    ray_init_args={"num_cpus": 8, "num_gpus": 0},
     client_fn=client_fn,
-    num_clients=4,
-    client_resources={"num_cpus": 1,"num_gpus": 0.2},
+    num_clients=5,
+    client_resources={"num_cpus": 1,"num_gpus": 0},
     config=fl.server.ServerConfig(num_rounds=10)
 )
