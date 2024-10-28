@@ -1,3 +1,4 @@
+import json
 import torch
 import numpy as np
 import torch.nn as nn
@@ -112,6 +113,9 @@ class MaliciousFlowerClient(FlowerClient):
         return np.exp(self.m * bias_change) - 1
 
     def fit(self, parameters, config):
+        bias_changes_matrix = []
+        amplification_factor = 10
+
         self.set_parameters(parameters)
         self.model.train()
 
@@ -120,6 +124,7 @@ class MaliciousFlowerClient(FlowerClient):
 
         # Train as usual
         for epoch in range(100):
+            initial_bias = self.extract_bias()  # Capture the initial bias at the start of the epoch
             for batch in self.dataloader:
                 self.optimizer.zero_grad()
                 X, y = batch
@@ -128,18 +133,28 @@ class MaliciousFlowerClient(FlowerClient):
                 loss.backward()
                 self.optimizer.step()
 
-            # Print updated bias after each epoch
-            log(INFO, f"Updated bias after epoch {epoch}: {self.extract_bias()}")
+            # Capture bias after training the epoch and calculate bias change
+            final_bias = self.extract_bias()
+            delta_bias = final_bias - initial_bias
+            bias_changes_matrix.append(delta_bias.tolist())  # Append bias change for each epoch
 
-        # Extract and calculate bias change after training
-        current_bias = self.extract_bias()
-        bias_change = self.calculate_bias_change(current_bias)
-        amplified_bias_change = self.amplify_bias_change(bias_change)
+        # Step 2: Construct a temporal matrix of Δbias differences between consecutive epochs
+        delta_bias_temporal = np.diff(np.array(bias_changes_matrix), axis=0)  # Equation (7)
 
-        # Store the amplified bias change for potential attack vector
-        self.bias_deltas.append(amplified_bias_change)
-        log(INFO, f"Malicious client {self.client_id}: Bias deltas {self.bias_deltas}")
-        bias_changes[self.client_id] = self.bias_deltas
+        # Step 3: Apply exponential amplification to the Δbias values
+        amplified_delta_bias = np.exp(amplification_factor * delta_bias_temporal) - 1  # Equation (9)
+
+        # Save amplified bias differences to a file for attack analysis
+        output_path = "amplified_bias_changes.json"
+
+        
+        formatted_bias = [f"{value:.{6}f}" for value in amplified_delta_bias]
+        log(INFO,formatted_bias[0])
+        with open(output_path, "w") as f:
+
+            json.dump(formatted_bias, f)
+
+        log(INFO, f"Amplified bias changes saved to {output_path}")
         return self.get_parameters(), len(self.dataset), {}
 
 
@@ -185,4 +200,5 @@ fl.simulation.start_simulation(
     client_resources={"num_cpus": 1,"num_gpus": 0},
     config=fl.server.ServerConfig(num_rounds=10)
 )
+torch.save(model.state_dict(), "final_model_parameters.pth")
 print(bias_changes)
