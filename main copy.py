@@ -52,7 +52,7 @@ class FlowerClient(fl.client.NumPyClient):
         self.dataset = Texas100Dataset(subset_features[client_data_splits[client_id]], subset_labels[client_data_splits[client_id]])
         self.dataloader = torch.utils.data.DataLoader(self.dataset, batch_size=64, shuffle=True,num_workers=0)
         self.criterion = torch.nn.CrossEntropyLoss()
-        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001)
+        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=0.005)
         log(INFO, f"Initialized client {self.client_id}")
     def get_parameters(self, config=None):
         return [val.detach().cpu().numpy() for val in self.model.parameters()]
@@ -92,7 +92,7 @@ class MaliciousFlowerClient(FlowerClient):
         super().__init__(model, client_id)
         self.previous_bias = None
         self.bias_deltas = []
-        self.m = 50  # Amplification param
+        self.m = 2  # Amplification param
         log(INFO, f"Malicious client {self.client_id}: starting")
     def extract_bias(self):
         # Explicitly extract the bias from the last layer
@@ -114,17 +114,17 @@ class MaliciousFlowerClient(FlowerClient):
 
     def fit(self, parameters, config):
         bias_changes_matrix = []
-        amplification_factor = 10
 
         self.set_parameters(parameters)
         self.model.train()
 
         # Print initial bias
-        log(INFO, f"Initial bias: {self.extract_bias()}")
 
         # Train as usual
         for epoch in range(100):
             initial_bias = self.extract_bias()  # Capture the initial bias at the start of the epoch
+
+            log(INFO, f"Initial bias: {initial_bias}")
             for batch in self.dataloader:
                 self.optimizer.zero_grad()
                 X, y = batch
@@ -135,20 +135,26 @@ class MaliciousFlowerClient(FlowerClient):
 
             # Capture bias after training the epoch and calculate bias change
             final_bias = self.extract_bias()
+            log(INFO,"Final bias:")
+            log(INFO,final_bias)
             delta_bias = final_bias - initial_bias
+            log(INFO, "delta:")
+            log(INFO, delta_bias)
+            log(INFO, "delta_bias_list:")
+            log(INFO, delta_bias.tolist())
             bias_changes_matrix.append(delta_bias.tolist())  # Append bias change for each epoch
-
+        
         # Step 2: Construct a temporal matrix of Δbias differences between consecutive epochs
         delta_bias_temporal = np.diff(np.array(bias_changes_matrix), axis=0)  # Equation (7)
-
-        # Step 3: Apply exponential amplification to the Δbias values
-        amplified_delta_bias = np.exp(amplification_factor * delta_bias_temporal) - 1  # Equation (9)
-
+        log(INFO, delta_bias_temporal)
+        #amplification function
+        amplified_delta_bias = np.exp(self.m * delta_bias_temporal) - 1  # Equation (9)
+        log(INFO, amplified_delta_bias)
         # Save amplified bias differences to a file for attack analysis
         output_path = "amplified_bias_changes.json"
 
         
-        formatted_bias = [f"{value:.{6}f}" for value in amplified_delta_bias]
+        formatted_bias = [[f"{element:.6f}" for element in row] for row in amplified_delta_bias]
         log(INFO,formatted_bias[0])
         with open(output_path, "w") as f:
 
