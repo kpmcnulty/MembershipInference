@@ -4,6 +4,9 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(filename='attack.log', encoding='utf-8', level=logging.INFO)
 # Load bias log and attack dataset splits
 with open("client_4_bias_log.json", "r") as f:
     bias_log = json.load(f)
@@ -14,21 +17,26 @@ with open("attack_splits.json", "r") as f:
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 logging.info(f"Using device: {device}")
 
-# Parameters :##### Adjust to find optimal
-amplification_factor = 5 
-interval = 5
+# Parameters for attack vector construction
+amplification_factor = 5  # Based on the paper's recommendation
+interval = 5  # Every 5 epochs
+logger.info(len(attack_splits))
+# Step 1: Select epochs at specified intervals and extract last layer biases
 selected_epochs = list(range(0, len(bias_log), interval))
-last_layer_biases = [np.array(bias_log[epoch][-1]) for epoch in selected_epochs]
+last_layer_biases = [np.array(bias_log[epoch][-1]) for epoch in selected_epochs]  # Each entry is for all data points
 
-#Construct bias change features at intervals of 5 epochs
+# Step 2: Compute bias changes (deltas) for each data point across selected epochs
 bias_deltas = []
 for i in range(1, len(selected_epochs)):
-    delta = last_layer_biases[i] - last_layer_biases[i - 1]
+    delta = last_layer_biases[i] - last_layer_biases[i - 1]  # Shape: (num_data_points, last_layer_bias_dim)
     bias_deltas.append(delta)
+# Step 2: Amplify features using the exponential function
+# Reshape each delta to be 2-dimensional (one row per data point)
+amplified_deltas = [np.exp(amplification_factor * delta).reshape(-1, 1) - 1 for delta in bias_deltas]
 
-#Amplify bias changes
-amplified_deltas = [np.exp(amplification_factor * delta) - 1 for delta in bias_deltas]
-attack_vectors = np.concatenate(amplified_deltas, axis=1)
+# Step 3: Concatenate amplified deltas along the second dimension to form attack vectors per data point
+attack_vectors = np.concatenate(amplified_deltas, axis=1)  # Final shape: (num_data_points, bias_dim * num_intervals)
+
 
 # Prepare attack dataset based on the splits in attacker
 train_mem_indices = attack_splits["attack_train_mem_indices"]

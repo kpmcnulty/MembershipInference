@@ -4,49 +4,58 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import logging
+
+# Set up logger
+logger = logging.getLogger(__name__)
+logging.basicConfig(filename='attack.log', encoding='utf-8', level=logging.INFO)
+
 # Load bias log and attack dataset splits
 with open("client_4_bias_log.json", "r") as f:
     bias_log = json.load(f)
 
 with open("attack_splits.json", "r") as f:
     attack_splits = json.load(f)
+# Load updated bias log with thousands of data points
+with open("client_4_bias_log.json", "r") as f:
+    bias_log = json.load(f)
 
-device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
-logging.info(f"Using device: {device}")
+selected_intervals = range(5, 100, 5)
+attack_vectors = []
 
-# Parameters :##### Adjust to find optimal
-amplification_factor = 5 
-interval = 5
-selected_epochs = list(range(0, len(bias_log), interval))
-last_layer_biases = [np.array(bias_log[epoch][-1]) for epoch in selected_epochs]
+# Construct attack vectors for each data point
+for data_point_idx in bias_log:
+    data_point_vectors = []
+    previous_bias = None
+    
+    for epoch_idx in selected_intervals:
+        # Get last layer bias for the current epoch
+        last_layer_bias = np.array(bias_log[data_point_idx][epoch_idx // 5])  # Assuming epochs are every 5 steps
+        
+        if previous_bias is not None:
+            # Calculate Δbias between epochs
+            delta_bias = last_layer_bias - previous_bias
+            data_point_vectors.append(delta_bias)  # Append Δbias for this data point
 
-#Construct bias change features at intervals of 5 epochs
-bias_deltas = []
-for i in range(1, len(selected_epochs)):
-    delta = last_layer_biases[i] - last_layer_biases[i - 1]
-    bias_deltas.append(delta)
+        previous_bias = last_layer_bias
+    
+    # Concatenate Δbias vectors to form attack vector for this data point
+    attack_vector = np.concatenate(data_point_vectors)
+    attack_vectors.append(attack_vector)
 
-#Amplify bias changes
-amplified_deltas = [np.exp(amplification_factor * delta) - 1 for delta in bias_deltas]
-attack_vectors = np.concatenate(amplified_deltas, axis=1)
+attack_vectors = np.array(attack_vectors)
 
-# Prepare attack dataset based on the splits in attacker
+# Ensure we have thousands of attack vectors matching the `attack_splits` indices
 train_mem_indices = attack_splits["attack_train_mem_indices"]
 train_non_indices = attack_splits["attack_train_non_indices"]
 test_mem_indices = attack_splits["attack_test_mem_indices"]
 test_non_indices = attack_splits["attack_test_non_indices"]
 
-# Construct training and testing data
 X_train = np.concatenate([attack_vectors[train_mem_indices], attack_vectors[train_non_indices]])
 y_train = np.array([1] * len(train_mem_indices) + [0] * len(train_non_indices))
 X_test = np.concatenate([attack_vectors[test_mem_indices], attack_vectors[test_non_indices]])
 y_test = np.array([1] * len(test_mem_indices) + [0] * len(test_non_indices))
 
-# Convert to tensors
-X_train = torch.tensor(X_train, dtype=torch.float32).unsqueeze(1) 
-y_train = torch.tensor(y_train, dtype=torch.long)  
-X_test = torch.tensor(X_test, dtype=torch.float32).unsqueeze(1)
-y_test = torch.tensor(y_test, dtype=torch.long)
+# Continue with model training as previously outlined...
 
 # Define CNN-based attack model based on description in paper
 class AttackModel(nn.Module):
@@ -85,7 +94,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(attack_model.parameters(), lr=0.001)
 
 # Training loop for the attack model
-for epoch in range(20): #can adjust
+for epoch in range(20):  # Can adjust epochs
     attack_model.train()
     optimizer.zero_grad()
     outputs = attack_model(X_train.to(device))

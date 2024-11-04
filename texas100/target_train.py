@@ -7,7 +7,7 @@ import flwr as fl
 from logging import INFO, DEBUG
 from flwr.common.logger import log
 from flwr.server.strategy import FedAvg
-
+import copy
 # Check for MPS availability
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 log(INFO, f"Using device: {device}")
@@ -18,8 +18,7 @@ fl.common.logger.configure(identifier="federated", filename="log.txt")
 dataset = np.load("./texas100.npz")
 features = dataset['features']
 global_labels = dataset['labels'] 
-
-# Define dataset splits according to paper Texas100 splits
+# Define dataset splits according to the Texas100 splits
 target_train_size = 30000
 target_test_size = 30000
 attack_train_mem_size = 24000
@@ -29,12 +28,25 @@ attack_test_non_size = 6000
 
 # Shuffle and split the dataset
 indices = np.random.permutation(len(features))
+
+# Step 1: Define target model indices
 target_train_indices = indices[:target_train_size]
 target_test_indices = indices[target_train_size:target_train_size + target_test_size]
-attack_train_mem_indices = indices[target_train_size + target_test_size:target_train_size + target_test_size + attack_train_mem_size]
-attack_train_non_indices = indices[target_train_size + target_test_size + attack_train_mem_size:target_train_size + target_test_size + attack_train_mem_size + attack_train_non_size]
-attack_test_mem_indices = indices[target_train_size + target_test_size + attack_train_mem_size + attack_train_non_size:target_train_size + target_test_size + attack_train_mem_size + attack_train_non_size + attack_test_mem_size]
-attack_test_non_indices = indices[target_train_size + target_test_size + attack_train_mem_size + attack_train_non_size + attack_test_mem_size:]
+
+# Step 2: Define attack model indices
+# Attack train memory: subset of target train
+attack_train_mem_indices = target_train_indices[:attack_train_mem_size]
+
+# Attack train non-member: indices not in target train
+non_member_indices = np.setdiff1d(indices, target_train_indices)
+attack_train_non_indices = non_member_indices[:attack_train_non_size]
+
+# Attack test memory: subset of target test
+attack_test_mem_indices = target_test_indices[:attack_test_mem_size]
+
+# Attack test non-member: indices not in target test
+non_member_test_indices = np.setdiff1d(indices, target_test_indices)
+attack_test_non_indices = non_member_test_indices[:attack_test_non_size]
 
 # Save attack dataset splits for attack training
 attack_splits = {
@@ -120,9 +132,10 @@ class FlowerClient(fl.client.NumPyClient):
 class MaliciousFlowerClient(FlowerClient):
     def __init__(self, model, client_id):
         super().__init__(model, client_id)
-        self.bias_log = []  
+        self.bias_log = [] 
+        self.global_model_snapshots = {}
         log(INFO, f"Initialized malicious client {self.client_id}")
-
+        self.selected_epochs = [5,10,20,25,30,35,45,50,60,85] # highest accuracy selected epochs from paper (for location30, can tweak)
     def extract_bias(self):
         # Extract and return biases as lists for JSON compatibility
         return [param.detach().cpu().numpy().tolist() for name, param in self.model.named_parameters() if 'bias' in name]
@@ -131,7 +144,7 @@ class MaliciousFlowerClient(FlowerClient):
         self.set_parameters(parameters)
         self.model.train()
 
-        # Same as regular client but Log biases each epoch
+        # Loop through epochs, tracking biases and saving snapshots at selected intervals
         for epoch in range(100):
             for batch in self.dataloader:
                 X, y = batch
@@ -142,14 +155,22 @@ class MaliciousFlowerClient(FlowerClient):
                 loss.backward()
                 self.optimizer.step()
 
+            # Save biases for each epoch
             self.bias_log.append(self.extract_bias())
 
+            # Save model parameters at selected epochs
+            if (epoch + 1) in self.selected_epochs:
+                self.global_model_snapshots[f"epoch_{epoch + 1}"] = copy.deepcopy(self.model.state_dict())
+
+        # Save bias log and model snapshots to files
         with open(f"client_{self.client_id}_bias_log.json", "w") as f:
             json.dump(self.bias_log, f)
-        log(INFO, f"Biases logged for client {self.client_id}")
         
-        return self.get_parameters(), len(self.dataset), {}
+        torch.save(self.global_model_snapshots, f"client_{self.client_id}_global_snapshots.pth")
+        log(INFO, f"Biases and global snapshots saved for client {self.client_id}")
 
+        # Return model parameters for federated learning
+        return self.get_parameters(), len(self.dataset), {}
 # Evaluation function for testing by server
 def evaluate_fn(server_round: int, parameters, config):
     model = create_model().to(device)

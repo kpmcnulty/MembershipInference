@@ -38,3 +38,627 @@ federated | INFO flwr 2024-11-02 20:55:41,399 | server.py:192 | aggregate_evalua
 federated | INFO flwr 2024-11-02 20:55:41,528 | server.py:112 | 
 federated | INFO flwr 2024-11-02 20:55:41,529 | server.py:113 | [ROUND 4]
 federated | INFO flwr 2024-11-02 20:55:41,529 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-02 21:29:19,927 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-02 21:29:24,341 | fresh copy.py:181 | Round 4 - Centralized evaluation accuracy: 0.5992666666666666, loss: 4.022829320526123
+federated | INFO flwr 2024-11-02 21:29:24,343 | server.py:131 | fit progress: (4, 4.022829320526123, {'accuracy': 0.5992666666666666}, 8396.135808375024)
+federated | INFO flwr 2024-11-02 21:29:24,343 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-02 21:31:35,545 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-02 21:31:35,546 | server.py:112 | 
+federated | INFO flwr 2024-11-02 21:31:35,546 | server.py:113 | [ROUND 5]
+federated | INFO flwr 2024-11-02 21:31:35,546 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-02 22:04:12,195 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-02 22:04:16,077 | fresh copy.py:181 | Round 5 - Centralized evaluation accuracy: 0.6009666666666666, loss: 4.021168907419841
+federated | INFO flwr 2024-11-02 22:04:16,079 | server.py:131 | fit progress: (5, 4.021168907419841, {'accuracy': 0.6009666666666666}, 10487.848388832994)
+federated | INFO flwr 2024-11-02 22:04:16,079 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-02 22:05:39,967 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-02 22:05:39,968 | server.py:112 | 
+federated | INFO flwr 2024-11-02 22:05:39,968 | server.py:113 | [ROUND 6]
+federated | INFO flwr 2024-11-02 22:05:39,969 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-02 22:37:29,008 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-02 22:37:33,026 | fresh copy.py:181 | Round 6 - Centralized evaluation accuracy: 0.5983333333333334, loss: 4.023768186442057
+federated | INFO flwr 2024-11-02 22:37:33,028 | server.py:131 | fit progress: (6, 4.023768186442057, {'accuracy': 0.5983333333333334}, 12484.789878125011)
+federated | INFO flwr 2024-11-02 22:37:33,028 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-02 22:38:47,237 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-02 22:38:47,238 | server.py:112 | 
+federated | INFO flwr 2024-11-02 22:38:47,238 | server.py:113 | [ROUND 7]
+federated | INFO flwr 2024-11-02 22:38:47,238 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-02 23:10:36,668 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-02 23:10:40,501 | fresh copy.py:181 | Round 7 - Centralized evaluation accuracy: 0.5988333333333333, loss: 4.023336876678467
+federated | INFO flwr 2024-11-02 23:10:40,503 | server.py:131 | fit progress: (7, 4.023336876678467, {'accuracy': 0.5988333333333333}, 14472.248200125003)
+federated | INFO flwr 2024-11-02 23:10:40,504 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-02 23:12:18,028 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-02 23:12:18,029 | server.py:112 | 
+federated | INFO flwr 2024-11-02 23:12:18,029 | server.py:113 | [ROUND 8]
+federated | INFO flwr 2024-11-02 23:12:18,029 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-02 23:43:58,191 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-02 23:44:01,083 | fresh copy.py:181 | Round 8 - Centralized evaluation accuracy: 0.5973333333333334, loss: 4.024856864929199
+federated | INFO flwr 2024-11-02 23:44:01,085 | server.py:131 | fit progress: (8, 4.024856864929199, {'accuracy': 0.5973333333333334}, 16472.820838292013)
+federated | INFO flwr 2024-11-02 23:44:01,085 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-02 23:45:21,160 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-02 23:45:21,161 | server.py:112 | 
+federated | INFO flwr 2024-11-02 23:45:21,161 | server.py:113 | [ROUND 9]
+federated | INFO flwr 2024-11-02 23:45:21,161 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 00:17:00,771 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 00:17:04,591 | fresh copy.py:181 | Round 9 - Centralized evaluation accuracy: 0.5961333333333333, loss: 4.026107459259033
+federated | INFO flwr 2024-11-03 00:17:04,592 | server.py:131 | fit progress: (9, 4.026107459259033, {'accuracy': 0.5961333333333333}, 18456.36388304201)
+federated | INFO flwr 2024-11-03 00:17:04,592 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 00:18:17,463 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 00:18:17,463 | server.py:112 | 
+federated | INFO flwr 2024-11-03 00:18:17,463 | server.py:113 | [ROUND 10]
+federated | INFO flwr 2024-11-03 00:18:17,463 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 00:49:48,580 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 00:49:52,286 | fresh copy.py:181 | Round 10 - Centralized evaluation accuracy: 0.5950666666666666, loss: 4.027158771006266
+federated | INFO flwr 2024-11-03 00:49:52,288 | server.py:131 | fit progress: (10, 4.027158771006266, {'accuracy': 0.5950666666666666}, 20424.03959662502)
+federated | INFO flwr 2024-11-03 00:49:52,288 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 00:51:21,935 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 00:51:21,953 | server.py:496 | 
+federated | INFO flwr 2024-11-03 00:51:21,953 | server.py:497 | [SUMMARY]
+federated | INFO flwr 2024-11-03 00:51:21,953 | server.py:498 | Run finished 10 round(s) in 20513.69s
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 	History (loss, distributed):
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 1: 0.3241
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 2: 0.8168666666666666
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 3: 0.866
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 4: 0.8751
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 5: 0.8771
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 6: 0.8781333333333333
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 7: 0.8784666666666666
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 8: 0.8790333333333333
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 9: 0.8792666666666666
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 10: 0.8793333333333333
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 	History (loss, centralized):
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 0: 4.6051896250406905
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 1: 4.420942883046468
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 2: 4.0357920331319175
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 3: 4.022123151397705
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 4: 4.022829320526123
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 5: 4.021168907419841
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 6: 4.023768186442057
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 7: 4.023336876678467
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 8: 4.024856864929199
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 9: 4.026107459259033
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 		round 10: 4.027158771006266
+federated | INFO flwr 2024-11-03 00:51:21,954 | server.py:500 | 	History (metrics, centralized):
+federated | INFO flwr 2024-11-03 00:51:21,955 | server.py:500 | 	{'accuracy': [(0, 0.010133333333333333),
+federated | INFO flwr 2024-11-03 00:51:21,955 | server.py:500 | 	              (1, 0.2823333333333333),
+federated | INFO flwr 2024-11-03 00:51:21,955 | server.py:500 | 	              (2, 0.5866),
+federated | INFO flwr 2024-11-03 00:51:21,955 | server.py:500 | 	              (3, 0.6002),
+federated | INFO flwr 2024-11-03 00:51:21,955 | server.py:500 | 	              (4, 0.5992666666666666),
+federated | INFO flwr 2024-11-03 00:51:21,955 | server.py:500 | 	              (5, 0.6009666666666666),
+federated | INFO flwr 2024-11-03 00:51:21,955 | server.py:500 | 	              (6, 0.5983333333333334),
+federated | INFO flwr 2024-11-03 00:51:21,955 | server.py:500 | 	              (7, 0.5988333333333333),
+federated | INFO flwr 2024-11-03 00:51:21,955 | server.py:500 | 	              (8, 0.5973333333333334),
+federated | INFO flwr 2024-11-03 00:51:21,955 | server.py:500 | 	              (9, 0.5961333333333333),
+federated | INFO flwr 2024-11-03 00:51:21,955 | server.py:500 | 	              (10, 0.5950666666666666)]}
+federated | INFO flwr 2024-11-03 00:51:21,955 | server.py:501 | 
+federated | INFO flwr 2024-11-03 13:03:28,132 | app.py:219 | Starting Flower simulation, config: num_rounds=10, no round_timeout
+federated | INFO flwr 2024-11-03 13:03:30,463 | app.py:242 | Flower VCE: Ray initialized with resources: {'node:127.0.0.1': 1.0, 'GPU': 1.0, 'memory': 6369973044.0, 'CPU': 8.0, 'node:__internal_head__': 1.0, 'object_store_memory': 2147483648.0}
+federated | INFO flwr 2024-11-03 13:03:30,463 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+federated | INFO flwr 2024-11-03 13:03:30,463 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.2}
+federated | INFO flwr 2024-11-03 13:03:30,474 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 5 actors
+federated | INFO flwr 2024-11-03 13:03:30,474 | server.py:92 | [INIT]
+federated | INFO flwr 2024-11-03 13:03:30,474 | server.py:281 | Requesting initial parameters from one random client
+federated | ERROR flwr 2024-11-03 13:03:39,456 | ray_client_proxy.py:106 | Traceback (most recent call last):
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=39156, ip=127.0.0.1, actor_id=d15ba62081baec973322165301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x165f0a3d0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 67, in adaptor_fn
+    return client_fn(str(cid))  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/texas100/target_train.py", line 215, in client_fn
+    return MaliciousFlowerClient(model, int(cid)).to_client()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: MaliciousFlowerClient.__init__() missing 5 required positional arguments: 'dataloader', 'optimizer', 'criterion', 'device', and 'non_member_data'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=39156, ip=127.0.0.1, actor_id=d15ba62081baec973322165301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x165f0a3d0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: MaliciousFlowerClient.__init__() missing 5 required positional arguments: 'dataloader', 'optimizer', 'criterion', 'device', and 'non_member_data'
+
+federated | ERROR flwr 2024-11-03 13:03:39,456 | ray_client_proxy.py:107 | [36mray::ClientAppActor.run()[39m (pid=39156, ip=127.0.0.1, actor_id=d15ba62081baec973322165301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x165f0a3d0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 67, in adaptor_fn
+    return client_fn(str(cid))  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/texas100/target_train.py", line 215, in client_fn
+    return MaliciousFlowerClient(model, int(cid)).to_client()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: MaliciousFlowerClient.__init__() missing 5 required positional arguments: 'dataloader', 'optimizer', 'criterion', 'device', and 'non_member_data'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=39156, ip=127.0.0.1, actor_id=d15ba62081baec973322165301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x165f0a3d0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: MaliciousFlowerClient.__init__() missing 5 required positional arguments: 'dataloader', 'optimizer', 'criterion', 'device', and 'non_member_data'
+federated | ERROR flwr 2024-11-03 13:03:39,456 | app.py:344 | [36mray::ClientAppActor.run()[39m (pid=39156, ip=127.0.0.1, actor_id=d15ba62081baec973322165301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x165f0a3d0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 67, in adaptor_fn
+    return client_fn(str(cid))  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/texas100/target_train.py", line 215, in client_fn
+    return MaliciousFlowerClient(model, int(cid)).to_client()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: MaliciousFlowerClient.__init__() missing 5 required positional arguments: 'dataloader', 'optimizer', 'criterion', 'device', and 'non_member_data'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=39156, ip=127.0.0.1, actor_id=d15ba62081baec973322165301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x165f0a3d0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: MaliciousFlowerClient.__init__() missing 5 required positional arguments: 'dataloader', 'optimizer', 'criterion', 'device', and 'non_member_data'
+federated | ERROR flwr 2024-11-03 13:03:39,458 | app.py:345 | Traceback (most recent call last):
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/app.py", line 339, in start_simulation
+    hist = run_fl(
+           ^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/server/server.py", line 492, in run_fl
+    hist, elapsed_time = server.fit(
+                         ^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/server/server.py", line 93, in fit
+    self.parameters = self._get_initial_parameters(server_round=0, timeout=timeout)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/server/server.py", line 284, in _get_initial_parameters
+    get_parameters_res = random_client.get_parameters(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 168, in get_parameters
+    message_out = self._submit_job(message, timeout)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 108, in _submit_job
+    raise ex
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=39156, ip=127.0.0.1, actor_id=d15ba62081baec973322165301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x165f0a3d0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 95, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+             ^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 67, in adaptor_fn
+    return client_fn(str(cid))  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/texas100/target_train.py", line 215, in client_fn
+    return MaliciousFlowerClient(model, int(cid)).to_client()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: MaliciousFlowerClient.__init__() missing 5 required positional arguments: 'dataloader', 'optimizer', 'criterion', 'device', and 'non_member_data'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=39156, ip=127.0.0.1, actor_id=d15ba62081baec973322165301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x165f0a3d0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: MaliciousFlowerClient.__init__() missing 5 required positional arguments: 'dataloader', 'optimizer', 'criterion', 'device', and 'non_member_data'
+
+federated | ERROR flwr 2024-11-03 13:03:39,458 | app.py:346 | Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 1, 'num_gpus': 0.2} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 1, 'num_gpus': 0.2}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
+federated | INFO flwr 2024-11-03 13:08:01,084 | app.py:219 | Starting Flower simulation, config: num_rounds=10, no round_timeout
+federated | INFO flwr 2024-11-03 13:08:03,393 | app.py:242 | Flower VCE: Ray initialized with resources: {'object_store_memory': 2147483648.0, 'memory': 6484251444.0, 'GPU': 1.0, 'node:127.0.0.1': 1.0, 'CPU': 8.0, 'node:__internal_head__': 1.0}
+federated | INFO flwr 2024-11-03 13:08:03,393 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+federated | INFO flwr 2024-11-03 13:08:03,393 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.2}
+federated | INFO flwr 2024-11-03 13:08:03,403 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 5 actors
+federated | INFO flwr 2024-11-03 13:08:03,403 | server.py:92 | [INIT]
+federated | INFO flwr 2024-11-03 13:08:03,403 | server.py:281 | Requesting initial parameters from one random client
+federated | INFO flwr 2024-11-03 13:08:18,041 | server.py:288 | Received initial parameters from one random client
+federated | INFO flwr 2024-11-03 13:08:18,042 | server.py:94 | Starting evaluation of initial global parameters
+federated | INFO flwr 2024-11-03 13:08:21,597 | target_train.py:186 | Round 0 - Centralized evaluation accuracy: 0.004633333333333333, loss: 4.605165985870362
+federated | INFO flwr 2024-11-03 13:08:21,599 | server.py:97 | initial parameters (loss, other metrics): 4.605165985870362, {'accuracy': 0.004633333333333333}
+federated | INFO flwr 2024-11-03 13:08:21,599 | server.py:112 | 
+federated | INFO flwr 2024-11-03 13:08:21,599 | server.py:113 | [ROUND 1]
+federated | INFO flwr 2024-11-03 13:08:21,600 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | ERROR flwr 2024-11-03 13:10:38,263 | ray_client_proxy.py:106 | Traceback (most recent call last):
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=39314, ip=127.0.0.1, actor_id=d33c53381aff6656bf03df1201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x105c43790>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client.py", line 255, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 259, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/texas100/target_train.py", line 149, in fit
+    if (epoch + 1) in self.selected_epochs:
+                      ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MaliciousFlowerClient' object has no attribute 'selected_epochs'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=39314, ip=127.0.0.1, actor_id=d33c53381aff6656bf03df1201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x105c43790>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'MaliciousFlowerClient' object has no attribute 'selected_epochs'
+
+federated | ERROR flwr 2024-11-03 13:10:38,268 | ray_client_proxy.py:107 | [36mray::ClientAppActor.run()[39m (pid=39314, ip=127.0.0.1, actor_id=d33c53381aff6656bf03df1201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x105c43790>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client.py", line 255, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 259, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/texas100/target_train.py", line 149, in fit
+    if (epoch + 1) in self.selected_epochs:
+                      ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MaliciousFlowerClient' object has no attribute 'selected_epochs'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=39314, ip=127.0.0.1, actor_id=d33c53381aff6656bf03df1201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x105c43790>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'MaliciousFlowerClient' object has no attribute 'selected_epochs'
+federated | INFO flwr 2024-11-03 13:16:20,617 | app.py:219 | Starting Flower simulation, config: num_rounds=10, no round_timeout
+federated | INFO flwr 2024-11-03 13:16:22,747 | app.py:242 | Flower VCE: Ray initialized with resources: {'memory': 7283625165.0, 'GPU': 1.0, 'node:127.0.0.1': 1.0, 'CPU': 8.0, 'object_store_memory': 2147483648.0, 'node:__internal_head__': 1.0}
+federated | INFO flwr 2024-11-03 13:16:22,747 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+federated | INFO flwr 2024-11-03 13:16:22,747 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.2}
+federated | INFO flwr 2024-11-03 13:16:22,755 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 5 actors
+federated | INFO flwr 2024-11-03 13:16:22,756 | server.py:92 | [INIT]
+federated | INFO flwr 2024-11-03 13:16:22,756 | server.py:281 | Requesting initial parameters from one random client
+federated | INFO flwr 2024-11-03 13:16:39,794 | server.py:288 | Received initial parameters from one random client
+federated | INFO flwr 2024-11-03 13:16:39,796 | server.py:94 | Starting evaluation of initial global parameters
+federated | INFO flwr 2024-11-03 13:16:43,509 | target_train.py:186 | Round 0 - Centralized evaluation accuracy: 0.0069, loss: 4.6052567077636715
+federated | INFO flwr 2024-11-03 13:16:43,511 | server.py:97 | initial parameters (loss, other metrics): 4.6052567077636715, {'accuracy': 0.0069}
+federated | INFO flwr 2024-11-03 13:16:43,511 | server.py:112 | 
+federated | INFO flwr 2024-11-03 13:16:43,511 | server.py:113 | [ROUND 1]
+federated | INFO flwr 2024-11-03 13:16:43,512 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | ERROR flwr 2024-11-03 13:19:11,461 | ray_client_proxy.py:106 | Traceback (most recent call last):
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=39527, ip=127.0.0.1, actor_id=11c4f395bcb3d0f70d60221d01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x10569cf50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client.py", line 255, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 259, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/texas100/target_train.py", line 150, in fit
+    self.global_model_snapshots[f"epoch_{epoch + 1}"] = copy.deepcopy(self.model.state_dict())
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MaliciousFlowerClient' object has no attribute 'global_model_snapshots'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=39527, ip=127.0.0.1, actor_id=11c4f395bcb3d0f70d60221d01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x10569cf50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'MaliciousFlowerClient' object has no attribute 'global_model_snapshots'
+
+federated | ERROR flwr 2024-11-03 13:19:11,461 | ray_client_proxy.py:107 | [36mray::ClientAppActor.run()[39m (pid=39527, ip=127.0.0.1, actor_id=11c4f395bcb3d0f70d60221d01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x10569cf50>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client.py", line 255, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 259, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/texas100/target_train.py", line 150, in fit
+    self.global_model_snapshots[f"epoch_{epoch + 1}"] = copy.deepcopy(self.model.state_dict())
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MaliciousFlowerClient' object has no attribute 'global_model_snapshots'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=39527, ip=127.0.0.1, actor_id=11c4f395bcb3d0f70d60221d01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x10569cf50>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'MaliciousFlowerClient' object has no attribute 'global_model_snapshots'
+federated | INFO flwr 2024-11-03 13:20:28,284 | app.py:219 | Starting Flower simulation, config: num_rounds=10, no round_timeout
+federated | INFO flwr 2024-11-03 13:20:30,374 | app.py:242 | Flower VCE: Ray initialized with resources: {'object_store_memory': 2147483648.0, 'GPU': 1.0, 'memory': 7026594612.0, 'node:127.0.0.1': 1.0, 'node:__internal_head__': 1.0, 'CPU': 8.0}
+federated | INFO flwr 2024-11-03 13:20:30,375 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+federated | INFO flwr 2024-11-03 13:20:30,375 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.2}
+federated | INFO flwr 2024-11-03 13:20:30,383 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 5 actors
+federated | INFO flwr 2024-11-03 13:20:30,383 | server.py:92 | [INIT]
+federated | INFO flwr 2024-11-03 13:20:30,383 | server.py:281 | Requesting initial parameters from one random client
+federated | INFO flwr 2024-11-03 13:20:40,112 | server.py:288 | Received initial parameters from one random client
+federated | INFO flwr 2024-11-03 13:20:40,112 | server.py:94 | Starting evaluation of initial global parameters
+federated | INFO flwr 2024-11-03 13:20:44,205 | target_train.py:187 | Round 0 - Centralized evaluation accuracy: 0.017466666666666665, loss: 4.605174554697673
+federated | INFO flwr 2024-11-03 13:20:44,207 | server.py:97 | initial parameters (loss, other metrics): 4.605174554697673, {'accuracy': 0.017466666666666665}
+federated | INFO flwr 2024-11-03 13:20:44,207 | server.py:112 | 
+federated | INFO flwr 2024-11-03 13:20:44,207 | server.py:113 | [ROUND 1]
+federated | INFO flwr 2024-11-03 13:20:44,207 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 13:30:02,204 | app.py:219 | Starting Flower simulation, config: num_rounds=10, no round_timeout
+federated | INFO flwr 2024-11-03 13:30:04,656 | app.py:242 | Flower VCE: Ray initialized with resources: {'node:127.0.0.1': 1.0, 'object_store_memory': 2147483648.0, 'CPU': 8.0, 'node:__internal_head__': 1.0, 'memory': 5194129408.0, 'GPU': 1.0}
+federated | INFO flwr 2024-11-03 13:30:04,656 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+federated | INFO flwr 2024-11-03 13:30:04,656 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.2}
+federated | INFO flwr 2024-11-03 13:30:04,666 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 5 actors
+federated | INFO flwr 2024-11-03 13:30:04,666 | server.py:92 | [INIT]
+federated | INFO flwr 2024-11-03 13:30:04,666 | server.py:281 | Requesting initial parameters from one random client
+federated | INFO flwr 2024-11-03 13:30:25,518 | server.py:288 | Received initial parameters from one random client
+federated | INFO flwr 2024-11-03 13:30:25,519 | server.py:94 | Starting evaluation of initial global parameters
+federated | INFO flwr 2024-11-03 13:30:28,892 | target_train.py:199 | Round 0 - Centralized evaluation accuracy: 0.005033333333333333, loss: 4.605094202423095
+federated | INFO flwr 2024-11-03 13:30:28,894 | server.py:97 | initial parameters (loss, other metrics): 4.605094202423095, {'accuracy': 0.005033333333333333}
+federated | INFO flwr 2024-11-03 13:30:28,894 | server.py:112 | 
+federated | INFO flwr 2024-11-03 13:30:28,894 | server.py:113 | [ROUND 1]
+federated | INFO flwr 2024-11-03 13:30:28,894 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 14:19:09,801 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | WARNING flwr 2024-11-03 14:19:09,883 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+federated | INFO flwr 2024-11-03 14:19:13,209 | target_train.py:199 | Round 1 - Centralized evaluation accuracy: 0.3103666666666667, loss: 4.418853138478597
+federated | INFO flwr 2024-11-03 14:19:13,209 | server.py:131 | fit progress: (1, 4.418853138478597, {'accuracy': 0.3103666666666667}, 1938.0149303749786)
+federated | INFO flwr 2024-11-03 14:19:13,209 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 14:21:00,526 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | WARNING flwr 2024-11-03 14:21:00,528 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+federated | INFO flwr 2024-11-03 14:21:00,528 | server.py:112 | 
+federated | INFO flwr 2024-11-03 14:21:00,528 | server.py:113 | [ROUND 2]
+federated | INFO flwr 2024-11-03 14:21:00,528 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 14:53:23,069 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 14:53:27,256 | target_train.py:199 | Round 2 - Centralized evaluation accuracy: 0.5843, loss: 4.038166910044352
+federated | INFO flwr 2024-11-03 14:53:27,257 | server.py:131 | fit progress: (2, 4.038166910044352, {'accuracy': 0.5843}, 3992.02844920801)
+federated | INFO flwr 2024-11-03 14:53:27,258 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 14:54:57,297 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 14:54:57,299 | server.py:112 | 
+federated | INFO flwr 2024-11-03 14:54:57,299 | server.py:113 | [ROUND 3]
+federated | INFO flwr 2024-11-03 14:54:57,299 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 15:27:22,833 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 15:27:26,842 | target_train.py:199 | Round 3 - Centralized evaluation accuracy: 0.6053333333333333, loss: 4.016816580454509
+federated | INFO flwr 2024-11-03 15:27:26,844 | server.py:131 | fit progress: (3, 4.016816580454509, {'accuracy': 0.6053333333333333}, 6031.600400207972)
+federated | INFO flwr 2024-11-03 15:27:26,844 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 15:28:39,472 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 15:28:39,473 | server.py:112 | 
+federated | INFO flwr 2024-11-03 15:28:39,473 | server.py:113 | [ROUND 4]
+federated | INFO flwr 2024-11-03 15:28:39,474 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 16:01:28,243 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 16:01:32,439 | target_train.py:199 | Round 4 - Centralized evaluation accuracy: 0.6047333333333333, loss: 4.017259477233886
+federated | INFO flwr 2024-11-03 16:01:32,441 | server.py:131 | fit progress: (4, 4.017259477233886, {'accuracy': 0.6047333333333333}, 8077.160536999989)
+federated | INFO flwr 2024-11-03 16:01:32,442 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 16:02:59,738 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 16:02:59,740 | server.py:112 | 
+federated | INFO flwr 2024-11-03 16:02:59,740 | server.py:113 | [ROUND 5]
+federated | INFO flwr 2024-11-03 16:02:59,740 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 16:36:21,869 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 16:36:25,907 | target_train.py:199 | Round 5 - Centralized evaluation accuracy: 0.6070333333333333, loss: 4.015218212381999
+federated | INFO flwr 2024-11-03 16:36:25,909 | server.py:131 | fit progress: (5, 4.015218212381999, {'accuracy': 0.6070333333333333}, 10170.606448333012)
+federated | INFO flwr 2024-11-03 16:36:25,909 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 16:37:51,000 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 16:37:51,001 | server.py:112 | 
+federated | INFO flwr 2024-11-03 16:37:51,002 | server.py:113 | [ROUND 6]
+federated | INFO flwr 2024-11-03 16:37:51,002 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 17:12:55,169 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 17:12:59,142 | target_train.py:199 | Round 6 - Centralized evaluation accuracy: 0.6058666666666667, loss: 4.016372686513265
+federated | INFO flwr 2024-11-03 17:12:59,143 | server.py:131 | fit progress: (6, 4.016372686513265, {'accuracy': 0.6058666666666667}, 12310.62936320802)
+federated | INFO flwr 2024-11-03 17:12:59,143 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 17:15:03,776 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 17:15:03,777 | server.py:112 | 
+federated | INFO flwr 2024-11-03 17:15:03,777 | server.py:113 | [ROUND 7]
+federated | INFO flwr 2024-11-03 17:15:03,777 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 18:07:01,406 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 18:07:06,023 | target_train.py:199 | Round 7 - Centralized evaluation accuracy: 0.6039333333333333, loss: 4.018283280944824
+federated | INFO flwr 2024-11-03 18:07:06,024 | server.py:131 | fit progress: (7, 4.018283280944824, {'accuracy': 0.6039333333333333}, 14665.733317375008)
+federated | INFO flwr 2024-11-03 18:07:06,025 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 18:09:09,489 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 18:09:09,489 | server.py:112 | 
+federated | INFO flwr 2024-11-03 18:09:09,490 | server.py:113 | [ROUND 8]
+federated | INFO flwr 2024-11-03 18:09:09,490 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 19:04:38,979 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 19:04:43,435 | target_train.py:199 | Round 8 - Centralized evaluation accuracy: 0.6063666666666667, loss: 4.015779072316487
+federated | INFO flwr 2024-11-03 19:04:43,436 | server.py:131 | fit progress: (8, 4.015779072316487, {'accuracy': 0.6063666666666667}, 17383.157630749978)
+federated | INFO flwr 2024-11-03 19:04:43,437 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 19:06:12,509 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 19:06:12,511 | server.py:112 | 
+federated | INFO flwr 2024-11-03 19:06:12,511 | server.py:113 | [ROUND 9]
+federated | INFO flwr 2024-11-03 19:06:12,511 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 19:42:34,837 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 19:42:38,249 | target_train.py:199 | Round 9 - Centralized evaluation accuracy: 0.6054333333333334, loss: 4.016793073527018
+federated | INFO flwr 2024-11-03 19:42:38,250 | server.py:131 | fit progress: (9, 4.016793073527018, {'accuracy': 0.6054333333333334}, 19657.940595707973)
+federated | INFO flwr 2024-11-03 19:42:38,250 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 19:44:08,819 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 19:44:08,820 | server.py:112 | 
+federated | INFO flwr 2024-11-03 19:44:08,820 | server.py:113 | [ROUND 10]
+federated | INFO flwr 2024-11-03 19:44:08,821 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 20:18:16,618 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 20:18:20,936 | target_train.py:199 | Round 10 - Centralized evaluation accuracy: 0.6046, loss: 4.017618744150798
+federated | INFO flwr 2024-11-03 20:18:20,938 | server.py:131 | fit progress: (10, 4.017618744150798, {'accuracy': 0.6046}, 21800.63925191702)
+federated | INFO flwr 2024-11-03 20:18:20,938 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-03 20:20:06,030 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-03 20:20:06,040 | server.py:496 | 
+federated | INFO flwr 2024-11-03 20:20:06,040 | server.py:497 | [SUMMARY]
+federated | INFO flwr 2024-11-03 20:20:06,040 | server.py:498 | Run finished 10 round(s) in 21905.73s
+federated | INFO flwr 2024-11-03 20:20:06,040 | server.py:500 | 	History (loss, distributed):
+federated | INFO flwr 2024-11-03 20:20:06,040 | server.py:500 | 		round 1: 0.34396666666666664
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 2: 0.8198333333333333
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 3: 0.8791333333333333
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 4: 0.8856333333333334
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 5: 0.8872666666666666
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 6: 0.8883
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 7: 0.8892666666666666
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 8: 0.8897333333333334
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 9: 0.8901333333333333
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 10: 0.8905666666666666
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	History (loss, centralized):
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 0: 4.605094202423095
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 1: 4.418853138478597
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 2: 4.038166910044352
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 3: 4.016816580454509
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 4: 4.017259477233886
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 5: 4.015218212381999
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 6: 4.016372686513265
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 7: 4.018283280944824
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 8: 4.015779072316487
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 9: 4.016793073527018
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 		round 10: 4.017618744150798
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	History (metrics, centralized):
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	{'accuracy': [(0, 0.005033333333333333),
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	              (1, 0.3103666666666667),
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	              (2, 0.5843),
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	              (3, 0.6053333333333333),
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	              (4, 0.6047333333333333),
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	              (5, 0.6070333333333333),
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	              (6, 0.6058666666666667),
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	              (7, 0.6039333333333333),
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	              (8, 0.6063666666666667),
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	              (9, 0.6054333333333334),
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	              (10, 0.6046)]}
+federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:501 | 

@@ -6,3 +6,4 @@ purchase100/purchase100.npz
 purchase100/attack_splits.json
 purchase100/client_4_bias_log.json
 purchase100/log.txt
+__pycache__
