@@ -136,12 +136,7 @@ class MaliciousFlowerClient(FlowerClient):
         self.global_model_snapshots = {}
         log(INFO, f"Initialized malicious client {self.client_id}")
         self.selected_epochs = [5,10,20,25,30,35,45,50,60,85] # highest accuracy selected epochs from paper (for location30, can tweak)
-    import json
-import torch
-import numpy as np
-import copy
-from flwr.common.logger import log
-from logging import INFO
+
 
 # Define the Malicious Client class with bias logging
 class MaliciousFlowerClient(FlowerClient):
@@ -176,8 +171,8 @@ class MaliciousFlowerClient(FlowerClient):
                 # Save a snapshot of the entire model at this epoch for later analysis
                 self.global_model_snapshots[f"epoch_{epoch + 1}"] = copy.deepcopy(self.model.state_dict())
         
-        torch.save(self.global_model_snapshots, f"client_{self.client_id}_global_snapshots.pth")
-        log(INFO, f"Biases and global snapshots saved for client {self.client_id}")
+                torch.save(self.global_model_snapshots, f"client_{self.client_id}_global_snapshots.pth")
+                log(INFO, f"Biases and global snapshots saved for client {self.client_id}")
 
         # Return updated model parameters for federated learning
         return self.get_parameters(), len(self.dataset), {}

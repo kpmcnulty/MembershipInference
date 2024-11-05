@@ -27,16 +27,28 @@ attack_train_non_size = 8000
 attack_test_mem_size = 2000
 attack_test_non_size = 2000
 
-# Shuffle and split the dataset
 indices = np.random.permutation(len(features))
+
+# Step 1: Define target model indices
 target_train_indices = indices[:target_train_size]
 target_test_indices = indices[target_train_size:target_train_size + target_test_size]
-attack_train_mem_indices = indices[target_train_size + target_test_size:target_train_size + target_test_size + attack_train_mem_size]
-attack_train_non_indices = indices[target_train_size + target_test_size + attack_train_mem_size:target_train_size + target_test_size + attack_train_mem_size + attack_train_non_size]
-attack_test_mem_indices = indices[target_train_size + target_test_size + attack_train_mem_size + attack_train_non_size:target_train_size + target_test_size + attack_train_mem_size + attack_train_non_size + attack_test_mem_size]
-attack_test_non_indices = indices[target_train_size + target_test_size + attack_train_mem_size + attack_train_non_size + attack_test_mem_size:]
 
-# Save attack dataset splits for use in local attack training
+# Step 2: Define attack model indices
+# Attack train memory: subset of target train
+attack_train_mem_indices = target_train_indices[:attack_train_mem_size]
+
+# Attack train non-member: indices not in target train
+non_member_indices = np.setdiff1d(indices, target_train_indices)
+attack_train_non_indices = non_member_indices[:attack_train_non_size]
+
+# Attack test memory: subset of target test
+attack_test_mem_indices = target_test_indices[:attack_test_mem_size]
+
+# Attack test non-member: indices not in target test
+non_member_test_indices = np.setdiff1d(indices, target_test_indices)
+attack_test_non_indices = non_member_test_indices[:attack_test_non_size]
+
+# Save attack dataset splits for attack training
 attack_splits = {
     "attack_train_mem_indices": attack_train_mem_indices.tolist(),
     "attack_train_non_indices": attack_train_non_indices.tolist(),
@@ -120,6 +132,7 @@ class MaliciousFlowerClient(FlowerClient):
         super().__init__(model, client_id)
         self.bias_log = [] 
         log(INFO, f"Initialized malicious client {self.client_id}")
+        self.selected_epochs = [5,10,20,25,30,35,45,50,60,85] # highest accuracy selected epochs from paper (for location30, can tweak)
 
     def extract_bias(self):
         return [param.detach().cpu().numpy().tolist() for name, param in self.model.named_parameters() if 'bias' in name]
@@ -139,12 +152,14 @@ class MaliciousFlowerClient(FlowerClient):
                 loss.backward()
                 self.optimizer.step()
 
-            self.bias_log.append(self.extract_bias())
-
-        with open(f"client_{self.client_id}_bias_log.json", "w") as f:
-            json.dump(self.bias_log, f)
-        log(INFO, f"Biases logged for client {self.client_id}")
+            # Log biases and save model snapshots only at selected epochs
+            if (epoch + 1) in self.selected_epochs:
+                # Save a snapshot of the entire model at this epoch for later analysis
+                self.global_model_snapshots[f"epoch_{epoch + 1}"] = copy.deepcopy(self.model.state_dict())
         
+        torch.save(self.global_model_snapshots, f"client_{self.client_id}_global_snapshots.pth")
+        log(INFO, f"Biases and global snapshots saved for client {self.client_id}")
+
         return self.get_parameters(), len(self.dataset), {}
 
 # Evaluation function for testing by server

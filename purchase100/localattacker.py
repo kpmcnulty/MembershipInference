@@ -1,111 +1,200 @@
 import json
-import numpy as np
 import torch
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from torch.utils.data import DataLoader, TensorDataset
 import torch.nn as nn
 import torch.optim as optim
-import logging
-
+import logging 
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename='attack.log', encoding='utf-8', level=logging.INFO)
-# Load bias log and attack dataset splits
+logging.basicConfig(filename='attack.log', encoding='utf-8', level=logging.DEBUG)
+
+# Set device
+device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+
+# Load the saved attack splits, biases, and model snapshots
+with open("attack_splits.json", "r") as f:
+    attack_splits = json.load(f)
 with open("client_4_bias_log.json", "r") as f:
     bias_log = json.load(f)
 
-with open("attack_splits.json", "r") as f:
-    attack_splits = json.load(f)
+dataset = np.load("./purchase100.npz")
+features = dataset['features']
+global_model_snapshots = torch.load("client_4_global_snapshots.pth")
 
-device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
-logging.info(f"Using device: {device}")
+# Define selected epochs for calculating bias deltas
+selected_epochs = [5, 10, 20, 25, 30, 35, 45, 50, 60, 85]
 
-# Parameters for attack vector construction
-amplification_factor = 5  # Based on the paper's recommendation
-interval = 5  # Every 5 epochs
-logger.info(len(attack_splits))
-# Step 1: Select epochs at specified intervals and extract last layer biases
-selected_epochs = list(range(0, len(bias_log), interval))
-last_layer_biases = [np.array(bias_log[epoch][-1]) for epoch in selected_epochs]  # Each entry is for all data points
+def create_model(): #model from paper
+    return torch.nn.Sequential(
+        torch.nn.Linear(600, 1024),
+        torch.nn.ReLU(),
+        torch.nn.Linear(1024, 256),
+        torch.nn.ReLU(),
+        torch.nn.Linear(256, 100),
+        torch.nn.Softmax(dim=1)
+    )
 
-# Step 2: Compute bias changes (deltas) for each data point across selected epochs
-bias_deltas = []
-for i in range(1, len(selected_epochs)):
-    delta = last_layer_biases[i] - last_layer_biases[i - 1]  # Shape: (num_data_points, last_layer_bias_dim)
-    bias_deltas.append(delta)
-# Step 2: Amplify features using the exponential function
-# Reshape each delta to be 2-dimensional (one row per data point)
-amplified_deltas = [np.exp(amplification_factor * delta).reshape(-1, 1) - 1 for delta in bias_deltas]
+def get_last_layer_biases(model_state_dict, data):
+    model = create_model()
+    model.load_state_dict(model_state_dict)
+    model.eval()
 
-# Step 3: Concatenate amplified deltas along the second dimension to form attack vectors per data point
-attack_vectors = np.concatenate(amplified_deltas, axis=1)  # Final shape: (num_data_points, bias_dim * num_intervals)
+    biases = []
+    with torch.no_grad():
+        for X in data:
+            _ = model(X)
+            last_layer_bias = model[-1].bias.detach().cpu().numpy()
+            biases.append(last_layer_bias)
+    
+    return np.array(biases)
 
+def calculate_bias_deltas(model_snapshots, data):
+    bias_deltas = []
+    for i in range(len(selected_epochs) - 1):
+        model1 = model_snapshots[f"epoch_{selected_epochs[i]}"]
+        model2 = model_snapshots[f"epoch_{selected_epochs[i + 1]}"]
 
-# Prepare attack dataset based on the splits in attacker
-train_mem_indices = attack_splits["attack_train_mem_indices"]
-train_non_indices = attack_splits["attack_train_non_indices"]
-test_mem_indices = attack_splits["attack_test_mem_indices"]
-test_non_indices = attack_splits["attack_test_non_indices"]
+        biases_epoch1 = get_last_layer_biases(model1, data)
+        biases_epoch2 = get_last_layer_biases(model2, data)
 
-# Construct training and testing data
-X_train = np.concatenate([attack_vectors[train_mem_indices], attack_vectors[train_non_indices]])
-y_train = np.array([1] * len(train_mem_indices) + [0] * len(train_non_indices))
-X_test = np.concatenate([attack_vectors[test_mem_indices], attack_vectors[test_non_indices]])
-y_test = np.array([1] * len(test_mem_indices) + [0] * len(test_non_indices))
+        delta_bias = biases_epoch2 - biases_epoch1
+        bias_deltas.append(delta_bias)
+    return np.array(bias_deltas).reshape(-1, 100)
 
-# Convert to tensors
-X_train = torch.tensor(X_train, dtype=torch.float32).unsqueeze(1) 
-y_train = torch.tensor(y_train, dtype=torch.long)  
-X_test = torch.tensor(X_test, dtype=torch.float32).unsqueeze(1)
-y_test = torch.tensor(y_test, dtype=torch.long)
+# Prepare member and non-member data
+member_data = torch.tensor(features[attack_splits["attack_train_mem_indices"]], dtype=torch.float32)
+non_member_data = torch.tensor(features[attack_splits["attack_train_non_indices"]], dtype=torch.float32)
+logger.info(f"member-data{member_data.shape}")
+logger.info(f"non_member_data{non_member_data.shape}")
+# Calculate bias deltas
+member_bias_deltas = calculate_bias_deltas(global_model_snapshots, member_data)
+non_member_bias_deltas = calculate_bias_deltas(global_model_snapshots, non_member_data)
+logger.info(f"member_bias_deltas{member_bias_deltas.shape}")
+logger.info(f"non_member_bias_deltas{non_member_bias_deltas.shape}")
+# Combine to form attack dataset
+X_attack = np.concatenate([member_bias_deltas, non_member_bias_deltas], axis=0)
+y_attack = np.concatenate([np.ones(member_bias_deltas.shape[0]), np.zeros(non_member_bias_deltas.shape[0])])
+logger.info(f"X attack shape, {X_attack.shape}")
+logger.info(f"y attack shape, {y_attack.shape}")
+# Split attack dataset
+X_train, X_val, y_train, y_val = train_test_split(X_attack, y_attack, test_size=0.2, random_state=42)
 
-# Define CNN-based attack model based on description in paper
+# Convert to PyTorch tensors
+X_train_tensor = torch.tensor(X_train, dtype=torch.float32)
+y_train_tensor = torch.tensor(y_train, dtype=torch.float32)
+X_val_tensor = torch.tensor(X_val, dtype=torch.float32)
+y_val_tensor = torch.tensor(y_val, dtype=torch.float32)
+logger.info(f"X train tensor shape, {X_train_tensor.shape}")
+logger.info(f"y train tensor shape, {y_train_tensor.shape}")
+logger.info(f"X val tensor shape, {X_val_tensor.shape}")
+logger.info(f"y val tensor shape, {y_val_tensor.shape}")
+# DataLoader setup
+train_loader = DataLoader(TensorDataset(X_train_tensor, y_train_tensor), batch_size=64, shuffle=True)
+val_loader = DataLoader(TensorDataset(X_val_tensor, y_val_tensor), batch_size=64)
+# Define the attack model (CNN + FCN structure)
 class AttackModel(nn.Module):
-    def __init__(self, input_dim):
+    def __init__(self):
         super(AttackModel, self).__init__()
-        self.conv1 = nn.Conv1d(1, 32, kernel_size=3, stride=1)
-        self.pool = nn.MaxPool1d(2)
-        self.conv2 = nn.Conv1d(32, 64, kernel_size=3, stride=1)
-        self.fc1 = nn.Linear(64 * ((input_dim - 2) // 2 - 2), 128)
+        # Convolutional layers for 1D bias delta vectors
+        self.conv1 = nn.Conv1d(in_channels=1, out_channels=32, kernel_size=3, padding=1)
+        self.conv2 = nn.Conv1d(in_channels=32, out_channels=64, kernel_size=3, padding=1)
+        
+        # Flatten layer to prepare for fully connected layers
+        self.flatten_size = 64 * 100  # 64 filters and 100 time steps after convolutions
+        self.fc1 = nn.Linear(self.flatten_size, 128)
         self.fc2 = nn.Linear(128, 64)
-        self.fc3 = nn.Linear(64, 2)
-        self.relu = nn.ReLU()
-        self.softmax = nn.Softmax(dim=1)
-
+        self.fc3 = nn.Linear(64, 1)
+        self.sigmoid = nn.Sigmoid()
+        
     def forward(self, x):
-        x = self.conv1(x)
-        x = self.relu(x)
-        x = self.pool(x)
-        x = self.conv2(x)
-        x = self.relu(x)
-        x = self.pool(x)
-        x = x.view(x.size(0), -1)
-        x = self.fc1(x)
-        x = self.relu(x)
-        x = self.fc2(x)
-        x = self.relu(x)
-        x = self.fc3(x)
-        return self.softmax(x)
+        # Adding a channel dimension for CNN input
+        x = x.unsqueeze(1)  # Shape becomes (batch_size, 1, 100)
+        x = torch.relu(self.conv1(x))
+        x = torch.relu(self.conv2(x))
+        x = x.view(x.size(0), -1)  # Flatten for fully connected layers
+        
+        x = torch.relu(self.fc1(x))
+        x = torch.relu(self.fc2(x))
+        x = self.sigmoid(self.fc3(x))
+        return x
 
-# Instantiate attack model
-input_dim = X_train.shape[2]
-attack_model = AttackModel(input_dim=input_dim).to(device)
-
-# Set up loss function and optimizer
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(attack_model.parameters(), lr=0.001)
+# Initialize and train the attack model
+attack_model = AttackModel().to(device)
+criterion = nn.BCELoss()
+optimizer = optim.Adam(attack_model.parameters(), lr=0.0005)
 
 # Training loop for the attack model
-for epoch in range(20): #can adjust
+epochs = 500
+best_accuracy = 0
+for epoch in range(epochs):
     attack_model.train()
-    optimizer.zero_grad()
-    outputs = attack_model(X_train.to(device))
-    loss = criterion(outputs, y_train.to(device))
-    loss.backward()
-    optimizer.step()
-    print(f"Epoch {epoch + 1}, Loss: {loss.item()}")
+    for X_batch, y_batch in train_loader:
+        X_batch, y_batch = X_batch.to(device), y_batch.to(device)
+        optimizer.zero_grad()
+        outputs = attack_model(X_batch).squeeze()
+        loss = criterion(outputs, y_batch)
+        loss.backward()
+        optimizer.step()
 
-# Evaluate the attack model
-attack_model.eval()
-with torch.no_grad():
-    outputs = attack_model(X_test.to(device))
-    _, predicted = torch.max(outputs, 1)
-    accuracy = (predicted == y_test.to(device)).float().mean()
-    print(f"Attack Model Test Accuracy: {accuracy.item() * 100:.2f}%")
+    # Validation
+    attack_model.eval()
+    y_pred = []
+    y_true = []
+    with torch.no_grad():
+        for X_batch, y_batch in val_loader:
+            X_batch = X_batch.to(device)
+            outputs = attack_model(X_batch).squeeze()
+            predictions = (outputs > 0.5).cpu().numpy()  # Binary classification threshold
+            y_pred.extend(predictions)
+            y_true.extend(y_batch.numpy())
+    
+    # Calculate accuracy for the current epoch
+    accuracy = accuracy_score(y_true, y_pred)
+    print(f"Epoch {epoch+1}/{epochs}, Validation Accuracy: {accuracy:.4f}")
+
+    # Save the model with the best validation accuracy
+    if accuracy > best_accuracy:
+        best_accuracy = accuracy
+        torch.save(attack_model.state_dict(), "best_attack_model.pth")
+        print(f"New best model saved with accuracy: {best_accuracy:.4f}") 
+# Initialize attack model
+attack_model = AttackModel(X_train.shape[1]).to(device)
+criterion = nn.BCELoss()
+optimizer = optim.Adam(attack_model.parameters(), lr=0.0005)
+
+# Training loop for the attack model
+epochs = 500
+best_accuracy = 0
+for epoch in range(epochs):
+    logger.info(epoch)
+    attack_model.train()
+    for X_batch, y_batch in train_loader:
+        X_batch, y_batch = X_batch.to(device), y_batch.to(device)
+        optimizer.zero_grad()
+        outputs = attack_model(X_batch).squeeze()
+        loss = criterion(outputs, y_batch)
+        loss.backward()
+        optimizer.step()
+
+    # Validation
+    attack_model.eval()
+    y_pred, y_true = [], []
+    with torch.no_grad():
+        for X_batch, y_batch in val_loader:
+            X_batch = X_batch.to(device)
+            outputs = attack_model(X_batch).squeeze()
+            predictions = (outputs > 0.5).cpu().numpy()
+            y_pred.extend(predictions)
+            y_true.extend(y_batch.numpy())
+
+    # Accuracy calculation
+    accuracy = accuracy_score(y_true, y_pred)
+    logger.info(f"Epoch {epoch+1}/{epochs}, Validation Accuracy: {accuracy:.4f}")
+
+    # Save best model
+    if accuracy > best_accuracy:
+        best_accuracy = accuracy
+        torch.save(attack_model.state_dict(), "best_attack_model.pth")
+        logger.info(f"New best model saved with accuracy: {best_accuracy:.4f}")
