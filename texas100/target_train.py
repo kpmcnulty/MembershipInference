@@ -136,15 +136,31 @@ class MaliciousFlowerClient(FlowerClient):
         self.global_model_snapshots = {}
         log(INFO, f"Initialized malicious client {self.client_id}")
         self.selected_epochs = [5,10,20,25,30,35,45,50,60,85] # highest accuracy selected epochs from paper (for location30, can tweak)
-    def extract_bias(self):
-        # Extract and return biases as lists for JSON compatibility
-        return [param.detach().cpu().numpy().tolist() for name, param in self.model.named_parameters() if 'bias' in name]
+    import json
+import torch
+import numpy as np
+import copy
+from flwr.common.logger import log
+from logging import INFO
 
+# Define the Malicious Client class with bias logging
+class MaliciousFlowerClient(FlowerClient):
+    def __init__(self, model, client_id):
+        super().__init__(model, client_id)
+        self.bias_log = []  # To store bias values of the last layer at each selected epoch
+        self.global_model_snapshots = {}  # To store model snapshots at selected epochs
+        log(INFO, f"Initialized malicious client {self.client_id}")
+
+        # Define the selected epochs for logging, based on membership inference criteria
+        self.selected_epochs = [5, 10, 20, 25, 30, 35, 45, 50, 60, 85]  # Example epochs, adjust if needed
+
+    
     def fit(self, parameters, config):
+        # Set the model parameters received from the server
         self.set_parameters(parameters)
         self.model.train()
 
-        # Loop through epochs, tracking biases and saving snapshots at selected intervals
+        # Loop through epochs and train the model, logging biases and saving snapshots at selected epochs
         for epoch in range(100):
             for batch in self.dataloader:
                 X, y = batch
@@ -155,22 +171,17 @@ class MaliciousFlowerClient(FlowerClient):
                 loss.backward()
                 self.optimizer.step()
 
-            # Save biases for each epoch
-            self.bias_log.append(self.extract_bias())
-
-            # Save model parameters at selected epochs
+            # Log biases and save model snapshots only at selected epochs
             if (epoch + 1) in self.selected_epochs:
+                # Save a snapshot of the entire model at this epoch for later analysis
                 self.global_model_snapshots[f"epoch_{epoch + 1}"] = copy.deepcopy(self.model.state_dict())
-
-        # Save bias log and model snapshots to files
-        with open(f"client_{self.client_id}_bias_log.json", "w") as f:
-            json.dump(self.bias_log, f)
         
         torch.save(self.global_model_snapshots, f"client_{self.client_id}_global_snapshots.pth")
         log(INFO, f"Biases and global snapshots saved for client {self.client_id}")
 
-        # Return model parameters for federated learning
+        # Return updated model parameters for federated learning
         return self.get_parameters(), len(self.dataset), {}
+
 # Evaluation function for testing by server
 def evaluate_fn(server_round: int, parameters, config):
     model = create_model().to(device)

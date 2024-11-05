@@ -662,3 +662,295 @@ federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	              (
 federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	              (9, 0.6054333333333334),
 federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:500 | 	              (10, 0.6046)]}
 federated | INFO flwr 2024-11-03 20:20:06,041 | server.py:501 | 
+federated | INFO flwr 2024-11-04 16:29:34,270 | app.py:219 | Starting Flower simulation, config: num_rounds=10, no round_timeout
+federated | INFO flwr 2024-11-04 16:29:36,598 | app.py:242 | Flower VCE: Ray initialized with resources: {'object_store_memory': 2147483648.0, 'CPU': 8.0, 'node:127.0.0.1': 1.0, 'node:__internal_head__': 1.0, 'GPU': 1.0, 'memory': 8094058087.0}
+federated | INFO flwr 2024-11-04 16:29:36,598 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+federated | INFO flwr 2024-11-04 16:29:36,598 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.2}
+federated | INFO flwr 2024-11-04 16:29:36,608 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 5 actors
+federated | INFO flwr 2024-11-04 16:29:36,608 | server.py:92 | [INIT]
+federated | INFO flwr 2024-11-04 16:29:36,608 | server.py:281 | Requesting initial parameters from one random client
+federated | INFO flwr 2024-11-04 16:30:05,032 | server.py:288 | Received initial parameters from one random client
+federated | INFO flwr 2024-11-04 16:30:05,033 | server.py:94 | Starting evaluation of initial global parameters
+federated | INFO flwr 2024-11-04 16:30:08,758 | target_train.py:200 | Round 0 - Centralized evaluation accuracy: 0.0061, loss: 4.60519246190389
+federated | INFO flwr 2024-11-04 16:30:08,760 | server.py:97 | initial parameters (loss, other metrics): 4.60519246190389, {'accuracy': 0.0061}
+federated | INFO flwr 2024-11-04 16:30:08,760 | server.py:112 | 
+federated | INFO flwr 2024-11-04 16:30:08,760 | server.py:113 | [ROUND 1]
+federated | INFO flwr 2024-11-04 16:30:08,760 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 16:31:00,522 | app.py:219 | Starting Flower simulation, config: num_rounds=10, no round_timeout
+federated | INFO flwr 2024-11-04 16:31:02,661 | app.py:242 | Flower VCE: Ray initialized with resources: {'node:__internal_head__': 1.0, 'GPU': 1.0, 'memory': 6771952845.0, 'object_store_memory': 2147483648.0, 'CPU': 8.0, 'node:127.0.0.1': 1.0}
+federated | INFO flwr 2024-11-04 16:31:02,662 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+federated | INFO flwr 2024-11-04 16:31:02,662 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.2}
+federated | INFO flwr 2024-11-04 16:31:02,669 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 5 actors
+federated | INFO flwr 2024-11-04 16:31:02,669 | server.py:92 | [INIT]
+federated | INFO flwr 2024-11-04 16:31:02,669 | server.py:281 | Requesting initial parameters from one random client
+federated | INFO flwr 2024-11-04 16:31:17,596 | server.py:288 | Received initial parameters from one random client
+federated | INFO flwr 2024-11-04 16:31:17,597 | server.py:94 | Starting evaluation of initial global parameters
+federated | INFO flwr 2024-11-04 16:31:22,076 | target_train.py:202 | Round 0 - Centralized evaluation accuracy: 0.0059, loss: 4.6050691937764485
+federated | INFO flwr 2024-11-04 16:31:22,078 | server.py:97 | initial parameters (loss, other metrics): 4.6050691937764485, {'accuracy': 0.0059}
+federated | INFO flwr 2024-11-04 16:31:22,079 | server.py:112 | 
+federated | INFO flwr 2024-11-04 16:31:22,079 | server.py:113 | [ROUND 1]
+federated | INFO flwr 2024-11-04 16:31:22,079 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 16:41:10,964 | app.py:219 | Starting Flower simulation, config: num_rounds=10, no round_timeout
+federated | INFO flwr 2024-11-04 16:41:13,090 | app.py:242 | Flower VCE: Ray initialized with resources: {'GPU': 1.0, 'memory': 7695853159.0, 'object_store_memory': 2147483648.0, 'node:127.0.0.1': 1.0, 'node:__internal_head__': 1.0, 'CPU': 8.0}
+federated | INFO flwr 2024-11-04 16:41:13,091 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+federated | INFO flwr 2024-11-04 16:41:13,091 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.2}
+federated | INFO flwr 2024-11-04 16:41:13,099 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 5 actors
+federated | INFO flwr 2024-11-04 16:41:13,099 | server.py:92 | [INIT]
+federated | INFO flwr 2024-11-04 16:41:13,100 | server.py:281 | Requesting initial parameters from one random client
+federated | INFO flwr 2024-11-04 16:41:34,651 | server.py:288 | Received initial parameters from one random client
+federated | INFO flwr 2024-11-04 16:41:34,651 | server.py:94 | Starting evaluation of initial global parameters
+federated | INFO flwr 2024-11-04 16:41:38,250 | target_train.py:203 | Round 0 - Centralized evaluation accuracy: 0.0201, loss: 4.605147296396892
+federated | INFO flwr 2024-11-04 16:41:38,252 | server.py:97 | initial parameters (loss, other metrics): 4.605147296396892, {'accuracy': 0.0201}
+federated | INFO flwr 2024-11-04 16:41:38,252 | server.py:112 | 
+federated | INFO flwr 2024-11-04 16:41:38,252 | server.py:113 | [ROUND 1]
+federated | INFO flwr 2024-11-04 16:41:38,252 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 18:17:48,954 | app.py:219 | Starting Flower simulation, config: num_rounds=10, no round_timeout
+federated | INFO flwr 2024-11-04 18:17:51,249 | app.py:242 | Flower VCE: Ray initialized with resources: {'node:127.0.0.1': 1.0, 'CPU': 8.0, 'object_store_memory': 2147483648.0, 'node:__internal_head__': 1.0, 'memory': 5635892839.0, 'GPU': 1.0}
+federated | INFO flwr 2024-11-04 18:17:51,249 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+federated | INFO flwr 2024-11-04 18:17:51,249 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.2}
+federated | INFO flwr 2024-11-04 18:17:51,258 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 5 actors
+federated | INFO flwr 2024-11-04 18:17:51,259 | server.py:92 | [INIT]
+federated | INFO flwr 2024-11-04 18:17:51,259 | server.py:281 | Requesting initial parameters from one random client
+federated | INFO flwr 2024-11-04 18:18:18,718 | server.py:288 | Received initial parameters from one random client
+federated | INFO flwr 2024-11-04 18:18:18,719 | server.py:94 | Starting evaluation of initial global parameters
+federated | INFO flwr 2024-11-04 18:18:22,385 | target_train.py:222 | Round 0 - Centralized evaluation accuracy: 0.044366666666666665, loss: 4.605122903442383
+federated | INFO flwr 2024-11-04 18:18:22,387 | server.py:97 | initial parameters (loss, other metrics): 4.605122903442383, {'accuracy': 0.044366666666666665}
+federated | INFO flwr 2024-11-04 18:18:22,387 | server.py:112 | 
+federated | INFO flwr 2024-11-04 18:18:22,387 | server.py:113 | [ROUND 1]
+federated | INFO flwr 2024-11-04 18:18:22,387 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | ERROR flwr 2024-11-04 18:20:41,803 | ray_client_proxy.py:106 | Traceback (most recent call last):
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 398, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 279, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 2667, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 864, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=66379, ip=127.0.0.1, actor_id=7ceea438ef3df61081bd044e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x10514f1d0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client.py", line 255, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 259, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/texas100/target_train.py", line 182, in fit
+    self.bias_log.append(self.extract_bias())
+                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/texas100/target_train.py", line 161, in extract_bias
+    return biases[0]  # Return the actual bias values as a 1D list (100 values for last layer)
+           ~~~~~~^^^
+IndexError: list index out of range
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=66379, ip=127.0.0.1, actor_id=7ceea438ef3df61081bd044e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x10514f1d0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: list index out of range
+
+federated | ERROR flwr 2024-11-04 18:20:41,815 | ray_client_proxy.py:107 | [36mray::ClientAppActor.run()[39m (pid=66379, ip=127.0.0.1, actor_id=7ceea438ef3df61081bd044e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x10514f1d0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 143, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/message_handler/message_handler.py", line 129, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+              ^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/client.py", line 255, in maybe_call_fit
+    return client.fit(fit_ins)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/client/numpy_client.py", line 259, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/texas100/target_train.py", line 182, in fit
+    self.bias_log.append(self.extract_bias())
+                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/texas100/target_train.py", line 161, in extract_bias
+    return biases[0]  # Return the actual bias values as a 1D list (100 values for last layer)
+           ~~~~~~^^^
+IndexError: list index out of range
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=66379, ip=127.0.0.1, actor_id=7ceea438ef3df61081bd044e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x10514f1d0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kmcnulty/Documents/SeniorProject/MembershipInference/.venv/lib/python3.11/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 63, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: list index out of range
+federated | INFO flwr 2024-11-04 18:23:00,765 | app.py:219 | Starting Flower simulation, config: num_rounds=10, no round_timeout
+federated | INFO flwr 2024-11-04 18:23:02,849 | app.py:242 | Flower VCE: Ray initialized with resources: {'object_store_memory': 2147483648.0, 'node:127.0.0.1': 1.0, 'node:__internal_head__': 1.0, 'CPU': 8.0, 'GPU': 1.0, 'memory': 7563363943.0}
+federated | INFO flwr 2024-11-04 18:23:02,849 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+federated | INFO flwr 2024-11-04 18:23:02,849 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.2}
+federated | INFO flwr 2024-11-04 18:23:02,858 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 5 actors
+federated | INFO flwr 2024-11-04 18:23:02,858 | server.py:92 | [INIT]
+federated | INFO flwr 2024-11-04 18:23:02,858 | server.py:281 | Requesting initial parameters from one random client
+federated | INFO flwr 2024-11-04 18:23:17,001 | server.py:288 | Received initial parameters from one random client
+federated | INFO flwr 2024-11-04 18:23:17,001 | server.py:94 | Starting evaluation of initial global parameters
+federated | INFO flwr 2024-11-04 18:23:20,662 | target_train.py:231 | Round 0 - Centralized evaluation accuracy: 0.005333333333333333, loss: 4.605083084869385
+federated | INFO flwr 2024-11-04 18:23:20,664 | server.py:97 | initial parameters (loss, other metrics): 4.605083084869385, {'accuracy': 0.005333333333333333}
+federated | INFO flwr 2024-11-04 18:23:20,664 | server.py:112 | 
+federated | INFO flwr 2024-11-04 18:23:20,664 | server.py:113 | [ROUND 1]
+federated | INFO flwr 2024-11-04 18:23:20,664 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 18:27:04,537 | app.py:219 | Starting Flower simulation, config: num_rounds=10, no round_timeout
+federated | INFO flwr 2024-11-04 18:27:06,605 | app.py:242 | Flower VCE: Ray initialized with resources: {'memory': 6852979917.0, 'GPU': 1.0, 'node:127.0.0.1': 1.0, 'CPU': 8.0, 'object_store_memory': 2147483648.0, 'node:__internal_head__': 1.0}
+federated | INFO flwr 2024-11-04 18:27:06,605 | app.py:248 | Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+federated | INFO flwr 2024-11-04 18:27:06,605 | app.py:271 | Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.2}
+federated | INFO flwr 2024-11-04 18:27:06,613 | app.py:317 | Flower VCE: Creating VirtualClientEngineActorPool with 5 actors
+federated | INFO flwr 2024-11-04 18:27:06,613 | server.py:92 | [INIT]
+federated | INFO flwr 2024-11-04 18:27:06,613 | server.py:281 | Requesting initial parameters from one random client
+federated | INFO flwr 2024-11-04 18:27:16,386 | server.py:288 | Received initial parameters from one random client
+federated | INFO flwr 2024-11-04 18:27:16,386 | server.py:94 | Starting evaluation of initial global parameters
+federated | INFO flwr 2024-11-04 18:27:20,373 | target_train.py:231 | Round 0 - Centralized evaluation accuracy: 0.0038, loss: 4.6051258290608725
+federated | INFO flwr 2024-11-04 18:27:20,375 | server.py:97 | initial parameters (loss, other metrics): 4.6051258290608725, {'accuracy': 0.0038}
+federated | INFO flwr 2024-11-04 18:27:20,375 | server.py:112 | 
+federated | INFO flwr 2024-11-04 18:27:20,375 | server.py:113 | [ROUND 1]
+federated | INFO flwr 2024-11-04 18:27:20,375 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 19:01:11,568 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | WARNING flwr 2024-11-04 19:01:11,644 | fedavg.py:252 | No fit_metrics_aggregation_fn provided
+federated | INFO flwr 2024-11-04 19:01:15,813 | target_train.py:231 | Round 1 - Centralized evaluation accuracy: 0.26193333333333335, loss: 4.51189949874878
+federated | INFO flwr 2024-11-04 19:01:15,814 | server.py:131 | fit progress: (1, 4.51189949874878, {'accuracy': 0.26193333333333335}, 2035.4244313340168)
+federated | INFO flwr 2024-11-04 19:01:15,814 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 19:03:14,035 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | WARNING flwr 2024-11-04 19:03:14,037 | fedavg.py:283 | No evaluate_metrics_aggregation_fn provided
+federated | INFO flwr 2024-11-04 19:03:14,037 | server.py:112 | 
+federated | INFO flwr 2024-11-04 19:03:14,037 | server.py:113 | [ROUND 2]
+federated | INFO flwr 2024-11-04 19:03:14,038 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 19:37:26,362 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-04 19:37:31,046 | target_train.py:231 | Round 2 - Centralized evaluation accuracy: 0.5833666666666667, loss: 4.038991187286377
+federated | INFO flwr 2024-11-04 19:37:31,047 | server.py:131 | fit progress: (2, 4.038991187286377, {'accuracy': 0.5833666666666667}, 4210.629421584017)
+federated | INFO flwr 2024-11-04 19:37:31,048 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 20:01:10,427 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-04 20:01:10,429 | server.py:112 | 
+federated | INFO flwr 2024-11-04 20:01:10,429 | server.py:113 | [ROUND 3]
+federated | INFO flwr 2024-11-04 20:01:10,429 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 20:57:53,970 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-04 20:57:58,029 | target_train.py:231 | Round 3 - Centralized evaluation accuracy: 0.5921666666666666, loss: 4.029981453831991
+federated | INFO flwr 2024-11-04 20:57:58,030 | server.py:131 | fit progress: (3, 4.029981453831991, {'accuracy': 0.5921666666666666}, 7442.423573667009)
+federated | INFO flwr 2024-11-04 20:57:58,030 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 20:59:36,185 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-04 20:59:36,189 | server.py:112 | 
+federated | INFO flwr 2024-11-04 20:59:36,190 | server.py:113 | [ROUND 4]
+federated | INFO flwr 2024-11-04 20:59:36,190 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 21:32:20,375 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-04 21:32:24,694 | target_train.py:231 | Round 4 - Centralized evaluation accuracy: 0.5924, loss: 4.029886232248942
+federated | INFO flwr 2024-11-04 21:32:24,696 | server.py:131 | fit progress: (4, 4.029886232248942, {'accuracy': 0.5924}, 9509.078764959006)
+federated | INFO flwr 2024-11-04 21:32:24,697 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 21:33:52,783 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-04 21:33:52,785 | server.py:112 | 
+federated | INFO flwr 2024-11-04 21:33:52,785 | server.py:113 | [ROUND 5]
+federated | INFO flwr 2024-11-04 21:33:52,785 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 22:07:16,530 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-04 22:07:20,665 | target_train.py:231 | Round 5 - Centralized evaluation accuracy: 0.5908333333333333, loss: 4.031276916122437
+federated | INFO flwr 2024-11-04 22:07:20,667 | server.py:131 | fit progress: (5, 4.031276916122437, {'accuracy': 0.5908333333333333}, 11605.033809375018)
+federated | INFO flwr 2024-11-04 22:07:20,667 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 22:08:43,799 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-04 22:08:43,801 | server.py:112 | 
+federated | INFO flwr 2024-11-04 22:08:43,801 | server.py:113 | [ROUND 6]
+federated | INFO flwr 2024-11-04 22:08:43,801 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 22:41:39,492 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-04 22:41:43,350 | target_train.py:231 | Round 6 - Centralized evaluation accuracy: 0.5944333333333334, loss: 4.027829882685343
+federated | INFO flwr 2024-11-04 22:41:43,350 | server.py:131 | fit progress: (6, 4.027829882685343, {'accuracy': 0.5944333333333334}, 13667.70884524996)
+federated | INFO flwr 2024-11-04 22:41:43,350 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 22:43:15,591 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-04 22:43:15,592 | server.py:112 | 
+federated | INFO flwr 2024-11-04 22:43:15,592 | server.py:113 | [ROUND 7]
+federated | INFO flwr 2024-11-04 22:43:15,593 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 23:18:56,623 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-04 23:19:00,854 | target_train.py:231 | Round 7 - Centralized evaluation accuracy: 0.5904333333333334, loss: 4.0318502414703365
+federated | INFO flwr 2024-11-04 23:19:00,856 | server.py:131 | fit progress: (7, 4.0318502414703365, {'accuracy': 0.5904333333333334}, 15905.235805958975)
+federated | INFO flwr 2024-11-04 23:19:00,856 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 23:20:46,279 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-04 23:20:46,280 | server.py:112 | 
+federated | INFO flwr 2024-11-04 23:20:46,280 | server.py:113 | [ROUND 8]
+federated | INFO flwr 2024-11-04 23:20:46,280 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 23:55:34,809 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-04 23:55:38,873 | target_train.py:231 | Round 8 - Centralized evaluation accuracy: 0.5906666666666667, loss: 4.031540450541178
+federated | INFO flwr 2024-11-04 23:55:38,875 | server.py:131 | fit progress: (8, 4.031540450541178, {'accuracy': 0.5906666666666667}, 18103.229919167003)
+federated | INFO flwr 2024-11-04 23:55:38,918 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-04 23:57:14,689 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-04 23:57:14,690 | server.py:112 | 
+federated | INFO flwr 2024-11-04 23:57:14,690 | server.py:113 | [ROUND 9]
+federated | INFO flwr 2024-11-04 23:57:14,690 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-05 00:30:30,891 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-05 00:30:34,833 | target_train.py:231 | Round 9 - Centralized evaluation accuracy: 0.594, loss: 4.028115375137329
+federated | INFO flwr 2024-11-05 00:30:34,835 | server.py:131 | fit progress: (9, 4.028115375137329, {'accuracy': 0.594}, 20199.151616459014)
+federated | INFO flwr 2024-11-05 00:30:34,835 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-05 00:32:14,539 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-05 00:32:14,540 | server.py:112 | 
+federated | INFO flwr 2024-11-05 00:32:14,540 | server.py:113 | [ROUND 10]
+federated | INFO flwr 2024-11-05 00:32:14,540 | server.py:226 | configure_fit: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-05 05:09:08,044 | server.py:240 | aggregate_fit: received 5 results and 0 failures
+federated | INFO flwr 2024-11-05 05:09:12,081 | target_train.py:231 | Round 10 - Centralized evaluation accuracy: 0.5914666666666667, loss: 4.030714644241333
+federated | INFO flwr 2024-11-05 05:09:12,083 | server.py:131 | fit progress: (10, 4.030714644241333, {'accuracy': 0.5914666666666667}, 36916.35958591697)
+federated | INFO flwr 2024-11-05 05:09:12,083 | server.py:178 | configure_evaluate: strategy sampled 5 clients (out of 5)
+federated | INFO flwr 2024-11-05 05:10:46,813 | server.py:192 | aggregate_evaluate: received 5 results and 0 failures
+federated | INFO flwr 2024-11-05 05:10:46,831 | server.py:496 | 
+federated | INFO flwr 2024-11-05 05:10:46,831 | server.py:497 | [SUMMARY]
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:498 | Run finished 10 round(s) in 37011.09s
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 	History (loss, distributed):
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 		round 1: 0.3096
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 		round 2: 0.8134666666666667
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 		round 3: 0.8541333333333333
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 		round 4: 0.8656
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 		round 5: 0.8674666666666667
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 		round 6: 0.8683666666666666
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 		round 7: 0.869
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 		round 8: 0.8695333333333334
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 		round 9: 0.8699333333333333
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 		round 10: 0.8702666666666666
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 	History (loss, centralized):
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 		round 0: 4.6051258290608725
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 		round 1: 4.51189949874878
+federated | INFO flwr 2024-11-05 05:10:46,832 | server.py:500 | 		round 2: 4.038991187286377
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 		round 3: 4.029981453831991
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 		round 4: 4.029886232248942
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 		round 5: 4.031276916122437
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 		round 6: 4.027829882685343
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 		round 7: 4.0318502414703365
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 		round 8: 4.031540450541178
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 		round 9: 4.028115375137329
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 		round 10: 4.030714644241333
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 	History (metrics, centralized):
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 	{'accuracy': [(0, 0.0038),
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 	              (1, 0.26193333333333335),
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 	              (2, 0.5833666666666667),
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 	              (3, 0.5921666666666666),
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 	              (4, 0.5924),
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 	              (5, 0.5908333333333333),
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 	              (6, 0.5944333333333334),
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 	              (7, 0.5904333333333334),
+federated | INFO flwr 2024-11-05 05:10:46,833 | server.py:500 | 	              (8, 0.5906666666666667),
+federated | INFO flwr 2024-11-05 05:10:46,834 | server.py:500 | 	              (9, 0.594),
+federated | INFO flwr 2024-11-05 05:10:46,834 | server.py:500 | 	              (10, 0.5914666666666667)]}
+federated | INFO flwr 2024-11-05 05:10:46,834 | server.py:501 | 
