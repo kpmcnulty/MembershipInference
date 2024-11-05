@@ -171,8 +171,8 @@ class MaliciousFlowerClient(FlowerClient):
                 # Save a snapshot of the entire model at this epoch for later analysis
                 self.global_model_snapshots[f"epoch_{epoch + 1}"] = copy.deepcopy(self.model.state_dict())
         
-                torch.save(self.global_model_snapshots, f"client_{self.client_id}_global_snapshots.pth")
-                log(INFO, f"Biases and global snapshots saved for client {self.client_id}")
+            torch.save(self.global_model_snapshots, f"client_{self.client_id}_global_snapshots.pth")
+            log(INFO, f"Biases and global snapshots saved for client {self.client_id}")
 
         # Return updated model parameters for federated learning
         return self.get_parameters(), len(self.dataset), {}
