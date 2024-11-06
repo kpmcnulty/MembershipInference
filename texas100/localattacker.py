@@ -8,7 +8,7 @@ import torch.nn as nn
 import torch.optim as optim
 import logging 
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename='attack.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename='attack.log', encoding='utf-8', level=logging.INFO)
 
 # Set device
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
@@ -16,8 +16,6 @@ device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 # Load the saved attack splits, biases, and model snapshots
 with open("attack_splits.json", "r") as f:
     attack_splits = json.load(f)
-with open("client_4_bias_log.json", "r") as f:
-    bias_log = json.load(f)
 
 dataset = np.load("./texas100.npz")
 features = dataset['features']
@@ -101,9 +99,10 @@ class AttackModel(nn.Module):
         # Convolutional layers for 1D bias delta vectors
         self.conv1 = nn.Conv1d(in_channels=1, out_channels=32, kernel_size=3, padding=1)
         self.conv2 = nn.Conv1d(in_channels=32, out_channels=64, kernel_size=3, padding=1)
-        
+        self.conv3 = nn.Conv1d(in_channels=64, out_channels=128, kernel_size=3, padding=1)  # increased from 64 to 128
+
         # Flatten layer to prepare for fully connected layers
-        self.flatten_size = 64 * 100  # 64 filters and 100 time steps after convolutions
+        self.flatten_size = 128 * 100  # 64 filters and 100 time steps after convolutions
         self.fc1 = nn.Linear(self.flatten_size, 128)
         self.fc2 = nn.Linear(128, 64)
         self.fc3 = nn.Linear(64, 1)
@@ -114,6 +113,7 @@ class AttackModel(nn.Module):
         x = x.unsqueeze(1)  # Shape becomes (batch_size, 1, 100)
         x = torch.relu(self.conv1(x))
         x = torch.relu(self.conv2(x))
+        x = torch.relu(self.conv3(x))
         x = x.view(x.size(0), -1)  # Flatten for fully connected layers
         
         x = torch.relu(self.fc1(x))
