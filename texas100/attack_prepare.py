@@ -10,7 +10,7 @@ logging.basicConfig(filename='prepare_data.log', encoding='utf-8', level=logging
 
 
 # Set device
-device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Load the saved attack splits and the dataset
 with open("attack_splits.json", "r") as f:
@@ -19,6 +19,8 @@ with open("attack_splits.json", "r") as f:
 dataset = np.load("./texas100.npz")
 features = dataset['features']
 global_model_snapshots = torch.load("client_4_global_snapshots.pth")
+amplification_factor = 2  # Adjust as necessary
+
 
 # Define selected epochs for calculating bias deltas
 selected_epochs = [5, 10, 20, 25, 30, 35, 45, 50, 60, 85]
@@ -46,6 +48,14 @@ def get_last_layer_biases(model_state_dict, data):
             biases.append(last_layer_bias)
     return np.array(biases)
 
+def amplify_bias_deltas(bias_deltas, amplification_factor):
+    """
+    Applies exponential amplification to bias deltas.
+    Keeps zero elements as zero and amplifies non-zero elements.
+    """
+    # Use the exponential amplification on all non-zero elements
+    amplified_deltas = np.exp(amplification_factor * bias_deltas) - 1
+    return amplified_deltas
 def calculate_bias_deltas(model_snapshots, data):
     bias_deltas = []
     for i in range(len(selected_epochs) - 1):
@@ -54,8 +64,12 @@ def calculate_bias_deltas(model_snapshots, data):
         biases_epoch1 = get_last_layer_biases(model1, data)
         biases_epoch2 = get_last_layer_biases(model2, data)
         delta_bias = biases_epoch2 - biases_epoch1
-        bias_deltas.append(delta_bias)
+        amplified_delta_bis = amplify_bias_deltas(delta_bias,amplification_factor)
+        bias_deltas.append(amplified_delta_bis)
+        
     return np.array(bias_deltas).reshape(-1, 100)
+
+
 
 # Prepare member and non-member data
 member_data = torch.tensor(features[attack_splits["attack_train_mem_indices"]], dtype=torch.float32)

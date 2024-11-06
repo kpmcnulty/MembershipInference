@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(filename='attack.log', encoding='utf-8', level=logging.INFO)
 
 # Set device
-device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Load the saved attack splits, biases, and model snapshots
 with open("attack_splits.json", "r") as f:
