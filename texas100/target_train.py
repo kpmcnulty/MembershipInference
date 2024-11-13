@@ -8,6 +8,7 @@ from logging import INFO, DEBUG
 from flwr.common.logger import log
 from flwr.server.strategy import FedAvg
 import copy
+
 # Check for MPS availability
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 log(INFO, f"Using device: {device}")
@@ -106,7 +107,7 @@ class FlowerClient(fl.client.NumPyClient):
         for epoch in range(100):  # Train for 100 epochs
             for batch in self.dataloader:
                 X, y = batch
-                X, y = X.to(device), y.to(device)   # IF you arent using mps or cuda delte .to(device)
+                X, y = X.to(device), y.to(device)
                 self.optimizer.zero_grad()
                 outputs = self.model(X)
                 loss = self.criterion(outputs, y)
@@ -128,27 +129,17 @@ class FlowerClient(fl.client.NumPyClient):
                 correct += (predicted == labels).sum().item()
         return correct / total, len(self.dataset), {}
 
-# Define Malicious Flower Client with bias logging
-class MaliciousFlowerClient(FlowerClient):
-    def __init__(self, model, client_id):
-        super().__init__(model, client_id)
-        self.bias_log = [] 
-        self.global_model_snapshots = {}
-        log(INFO, f"Initialized malicious client {self.client_id}")
-        self.selected_epochs = [5,10,20,25,30,35,45,50,60,85] # highest accuracy selected epochs from paper (for location30, can tweak)
 
-
-# Define the Malicious Client class with bias logging
+# Define the Malicious Client class with bias logging and model snapshot saving
 class MaliciousFlowerClient(FlowerClient):
     def __init__(self, model, client_id):
         super().__init__(model, client_id)
         self.bias_log = []  # To store bias values of the last layer at each selected epoch
-        self.global_model_snapshots = {}  # To store model snapshots at selected epochs
+        self.global_model_snapshots = {}  # To store model snapshots at selected epochs and rounds
         log(INFO, f"Initialized malicious client {self.client_id}")
 
         # Define the selected epochs for logging, based on membership inference criteria
         self.selected_epochs = [5, 10, 20, 25, 30, 35, 45, 50, 60, 85]  # Example epochs, adjust if needed
-
     
     def fit(self, parameters, config):
         # Set the model parameters received from the server
@@ -170,10 +161,12 @@ class MaliciousFlowerClient(FlowerClient):
             if (epoch + 1) in self.selected_epochs:
                 # Save a snapshot of the entire model at this epoch for later analysis
                 self.global_model_snapshots[f"epoch_{epoch + 1}"] = copy.deepcopy(self.model.state_dict())
-        
-            torch.save(self.global_model_snapshots, f"client_{self.client_id}_global_snapshots.pth")
-            log(INFO, f"Biases and global snapshots saved for client {self.client_id}")
+        # Save a snapshot of the model at the end of the round with a unique name
 
+        # Save the model snapshots for analysis
+        torch.save(self.global_model_snapshots, f"client_{self.client_id}_global_snapshots_round_{config['round']}.pth")
+        log(INFO, f"Global snapshots saved for client {self.client_id}")
+        self.global_model_snapshots = {} #wipe, not sure if needed
         # Return updated model parameters for federated learning
         return self.get_parameters(), len(self.dataset), {}
 
@@ -212,10 +205,16 @@ def client_fn(cid: str):
         return MaliciousFlowerClient(model, int(cid)).to_client()
     else:
         return FlowerClient(model, int(cid)).to_client()
-
+    
 # eval stategy for sim
+def fit_config(server_round: int):
+    config = {
+        "round": server_round
+    }
+    return config
 strategy = FedAvg(
-    evaluate_fn=evaluate_fn
+   on_fit_config_fn=fit_config,
+   evaluate_fn=evaluate_fn
 )
 
 # Start Flower Simulation 
