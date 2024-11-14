@@ -31,6 +31,7 @@ std_member_vector = np.std(member_vectors, axis=0)
 std_non_member_vector = np.std(non_member_vectors, axis=0)
 
 print(attack_vectors.shape)
+print(attack_vectors[:40])
 # Split the attack dataset into training and validation sets (80% train, 20% validation)
 X_train, X_val, y_train, y_val = train_test_split(attack_vectors, attack_labels, test_size=0.2, random_state=42)
 

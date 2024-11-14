@@ -30,7 +30,7 @@ non_member_data = torch.tensor(features[non_member_indices], dtype=torch.float32
 non_member_labels = torch.tensor(labels[non_member_indices], dtype=torch.long)
 
 global_model_snapshots = torch.load("client_4_global_snapshots_round_3.pth")
-amplification_factor = 100
+amplification_factor = 1000
 
 # Define selected epochs for calculating bias deltas
 selected_epochs = [5, 10, 20, 25, 30, 35, 45, 50, 60, 85]
@@ -81,7 +81,7 @@ def construct_attack_vectors(global_model_snapshots, selected_epochs, amplificat
             model.load_state_dict(model_state_dict)
             model = model.to(device)
             # Record bias before training
-            bias_before = model[-1].bias.detach().cpu().numpy()
+            bias_before = model[-1].bias.detach().cpu().clone().numpy()
 
             # Define optimizer
             optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
@@ -94,47 +94,62 @@ def construct_attack_vectors(global_model_snapshots, selected_epochs, amplificat
             label_scalar = torch.argmax(label_value).item()
             label_tensor = torch.tensor([label_scalar], dtype=torch.long).to(device)
 
-            # Update model with the single data point
-            optimizer.zero_grad()
-            output = model(feature_tensor.unsqueeze(0))
-            loss = criterion(output, label_tensor)
-            loss.backward()
-            #print("Bias gradient changed:", True in (model[-1].bias.grad != 0.0))
-            
-            #optimizer.step()
-            ##currently, optimizer isnt updating so manual update
-            with torch.no_grad():
-                # Access the model's bias parameter directly
-                bias = model[-1].bias
-
-                # Create a copy of the bias (detached from the graph)
-                bias_copy = bias.clone()
-
-                # Check if there is a gradient for the bias
-                if bias.grad is not None:
-                    # Update the bias manually using the gradient
-                    bias_after = bias_copy - (0.001 * bias.grad)
-
-
+            # Train model with the single data point for multiple epochs
+            num_epochs = 5  # Set this to the desired number of epochs
+           
+            for epoch_i in range(num_epochs):
+                optimizer.zero_grad()
+                output = model(feature_tensor.unsqueeze(0))
+                loss = criterion(output, label_tensor)
+                loss.backward()
+                optimizer.step()
+                #print(bias_gradient)
+            # Record bias after training (after all epochs)
+            bias_after = model[-1].bias.detach().cpu().numpy()
 
             # Record bias after training
             #print(f"bias before == bias after: {np.array_equal(bias_before,bias_after)}")
             # Calculate bias change for the data point
+            #print("Bias before update:", bias_before)
+            #print("Bias after update:", model[-1].bias.detach().cpu().numpy())
             bias_change = bias_after - bias_before
+            
             bias_changes.append(bias_change)
-
-        # Calculate the delta of bias changes between consecutive snapshots
+            
+            # Calculate the delta of bias changes between consecutive snapshots, temporal
         bias_deltas = []
+        #print(len(bias_changes))
         for i in range(len(bias_changes) - 1):
             delta = bias_changes[i + 1] - bias_changes[i]
             bias_deltas.append(delta)
-
+        #print(len(bias_deltas))
         flattened_deltas = np.concatenate(bias_deltas)
         
+        # Visualize ampliefiers
 
-        #print(bias_deltas)
-        # Amplify the bias deltas after accumulating them
-        amplified_deltas = amplify_bias_deltas(bias_deltas, amplification_factor)
+        # amplification_factors = [5, 10, 50, 100,200]
+
+        # # Create a figure to plot bias changes for different amplification factors
+        # plt.figure(figsize=(15, len(amplification_factors) * 4))
+
+                
+        # for idx, factor in enumerate(amplification_factors):
+        #     # Amplify the bias changes using the given amplification factor
+        #     amplified_deltas = amplify_bias_deltas(bias_changes, factor)
+        #     amplified_deltas_array = np.concatenate(amplified_deltas).flatten()  # Flatten to get a 1D array for distribution
+
+        #     # Plot the histogram for the current amplification factor
+        #     plt.subplot(len(amplification_factors), 1, idx + 1)
+        #     plt.hist(amplified_deltas_array, bins=30, alpha=0.7, color='b')
+        #     plt.title(f"Histogram of Bias Changes (Amplification Factor = {factor})")
+        #     plt.xlabel("Bias Change Value")
+        #     plt.ylabel("Frequency")
+        #plt.tight_layout()
+        #plt.show()
+        
+        amplified_deltas = amplify_bias_deltas(bias_deltas,100)
+        #print(bias_deltas[0])
+        #print(amplified_deltas[0])
         #print("amplified : " , amplified_deltas)
         # Construct the attack vector by concatenating amplified deltas
         attack_vector = np.concatenate(amplified_deltas, axis=0)
