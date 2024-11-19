@@ -104,7 +104,7 @@ class FlowerClient(fl.client.NumPyClient):
     def fit(self, parameters, config):
         self.set_parameters(parameters)
         self.model.train()
-        for epoch in range(100):  # Train for 100 epochs
+        for epoch in range(20):  #for 20 epochs per round
             for batch in self.dataloader:
                 X, y = batch
                 X, y = X.to(device), y.to(device)
@@ -147,7 +147,7 @@ class MaliciousFlowerClient(FlowerClient):
         self.model.train()
 
         # Loop through epochs and train the model, logging biases and saving snapshots at selected epochs
-        for epoch in range(100):
+        for epoch in range(20): #updated to be 100 total per round model
             for batch in self.dataloader:
                 X, y = batch
                 X, y = X.to(device), y.to(device)
