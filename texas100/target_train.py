@@ -22,39 +22,28 @@ global_labels = dataset['labels']
 # Define dataset splits according to the Texas100 splits
 target_train_size = 30000
 target_test_size = 30000
-attack_train_mem_size = 24000
-attack_train_non_size = 24000
-attack_test_mem_size = 6000
-attack_test_non_size = 6000
 
 # Shuffle and split the dataset
-indices = np.random.permutation(len(features))
+indices = np.random.permutation(60000)
 
 # Step 1: Define target model indices
 target_train_indices = indices[:target_train_size]
 target_test_indices = indices[target_train_size:target_train_size + target_test_size]
+print(len(target_train_indices))
+print(len(target_test_indices))
+print(np.intersect1d(target_train_indices, target_test_indices))
 
-# Step 2: Define attack model indices
-# Attack train memory: subset of target train
-attack_train_mem_indices = target_train_indices[:attack_train_mem_size]
-
-# Attack train non-member: indices not in target train
+# Step 2: Define non-member indices
 non_member_indices = np.setdiff1d(indices, target_train_indices)
-attack_train_non_indices = non_member_indices[:attack_train_non_size]
-
-# Attack test memory: subset of target test
-attack_test_mem_indices = target_test_indices[:attack_test_mem_size]
-
-# Attack test non-member: indices not in target test
-non_member_test_indices = np.setdiff1d(indices, target_test_indices)
-attack_test_non_indices = non_member_test_indices[:attack_test_non_size]
-
-# Save attack dataset splits for attack training
+# Step 3: Combine members and non-members for attack model
+member_indices = target_train_indices.tolist()
+non_member_indices = non_member_indices.tolist()
+print(len(member_indices))
+print(len(non_member_indices))
+print(np.intersect1d(member_indices, non_member_indices))
 attack_splits = {
-    "attack_train_mem_indices": attack_train_mem_indices.tolist(),
-    "attack_train_non_indices": attack_train_non_indices.tolist(),
-    "attack_test_mem_indices": attack_test_mem_indices.tolist(),
-    "attack_test_non_indices": attack_test_non_indices.tolist()
+    "member_indices": member_indices,
+    "non_member_indices": non_member_indices,
 }
 with open("attack_splits.json", "w") as f:
     json.dump(attack_splits, f)
@@ -104,7 +93,7 @@ class FlowerClient(fl.client.NumPyClient):
     def fit(self, parameters, config):
         self.set_parameters(parameters)
         self.model.train()
-        for epoch in range(20):  #for 20 epochs per round
+        for epoch in range(1): #more rounds, non-consequtive epochs
             for batch in self.dataloader:
                 X, y = batch
                 X, y = X.to(device), y.to(device)
@@ -129,25 +118,34 @@ class FlowerClient(fl.client.NumPyClient):
                 correct += (predicted == labels).sum().item()
         return correct / total, len(self.dataset), {}
 
-
-# Define the Malicious Client class with bias logging and model snapshot saving
-class MaliciousFlowerClient(FlowerClient):
+class MaliciousFlowerClient(fl.client.NumPyClient):
     def __init__(self, model, client_id):
-        super().__init__(model, client_id)
-        self.bias_log = []  # To store bias values of the last layer at each selected epoch
-        self.global_model_snapshots = {}  # To store model snapshots at selected epochs and rounds
-        log(INFO, f"Initialized malicious client {self.client_id}")
-
-        # Define the selected epochs for logging, based on membership inference criteria
-        self.selected_epochs = [5, 10, 20, 25, 30, 35, 45, 50, 60, 85]  # Example epochs, adjust if needed
+        self.model = model.to(device)
+        self.client_id = client_id
+        self.dataset = Texas100Dataset(features[target_train_indices], global_labels[target_train_indices])
+        self.dataloader = torch.utils.data.DataLoader(self.dataset, batch_size=64, shuffle=True, num_workers=0)
+        self.criterion = torch.nn.CrossEntropyLoss()
+        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001)
+        log(INFO, f"Initialized client {self.client_id}")
+    
+    def get_parameters(self, config=None):
+        return [val.detach().cpu().numpy() for val in self.model.parameters()]
+    
+    def set_parameters(self, parameters):
+        for param, new_param in zip(self.model.parameters(), parameters):
+            param.data = torch.tensor(new_param, dtype=torch.float32).to(device)
     
     def fit(self, parameters, config):
-        # Set the model parameters received from the server
         self.set_parameters(parameters)
-        self.model.train()
+        
+        # Save the model state before training
 
-        # Loop through epochs and train the model, logging biases and saving snapshots at selected epochs
-        for epoch in range(20): #updated to be 100 total per round model
+        pre_training_file = f"snaphot__{config['round']*5}.pth"
+        torch.save(self.model.state_dict(), pre_training_file)
+        log(INFO, f"Saved pre-training model state to {pre_training_file}")
+        
+        self.model.train()
+        for epoch in range(1):  
             for batch in self.dataloader:
                 X, y = batch
                 X, y = X.to(device), y.to(device)
@@ -156,20 +154,8 @@ class MaliciousFlowerClient(FlowerClient):
                 loss = self.criterion(outputs, y)
                 loss.backward()
                 self.optimizer.step()
-
-            # Log biases and save model snapshots only at selected epochs
-            if (epoch + 1) in self.selected_epochs:
-                # Save a snapshot of the entire model at this epoch for later analysis
-                self.global_model_snapshots[f"epoch_{epoch + 1}"] = copy.deepcopy(self.model.state_dict())
-        # Save a snapshot of the model at the end of the round with a unique name
-
-        # Save the model snapshots for analysis
-        torch.save(self.global_model_snapshots, f"client_{self.client_id}_global_snapshots_round_{config['round']}.pth")
-        log(INFO, f"Global snapshots saved for client {self.client_id}")
-        self.global_model_snapshots = {} #wipe, not sure if needed
-        # Return updated model parameters for federated learning
         return self.get_parameters(), len(self.dataset), {}
-
+    
 # Evaluation function for testing by server
 def evaluate_fn(server_round: int, parameters, config):
     model = create_model().to(device)
@@ -201,7 +187,7 @@ def evaluate_fn(server_round: int, parameters, config):
 # initialize honest and malicious client
 def client_fn(cid: str):
     model = create_model()
-    if cid == "4":  # Make client 4 malicious for membership inference attack
+    if cid == "4":  # Make client 2 malicious for membership inference attack
         return MaliciousFlowerClient(model, int(cid)).to_client()
     else:
         return FlowerClient(model, int(cid)).to_client()
@@ -223,6 +209,6 @@ fl.simulation.start_simulation(
     client_fn=client_fn,
     num_clients=5,
     client_resources={"num_cpus": 1, "num_gpus": .2},
-    config=fl.server.ServerConfig(num_rounds=10),
+    config=fl.server.ServerConfig(num_rounds=100), # 100 sharing 'epochs' so local training is non-consequtive 
     strategy=strategy
 )

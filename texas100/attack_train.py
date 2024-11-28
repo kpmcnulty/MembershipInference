@@ -20,42 +20,73 @@ attack_labels = np.load("attack_labels.npy")
 # Inspect the data to see differences between members and non-members
 member_vectors = attack_vectors[attack_labels == 1]
 non_member_vectors = attack_vectors[attack_labels == 0]
-print(len(member_vectors))
-print(len(non_member_vectors))
-amplification_factors = [1, 2, 5]
-# def amplify_bias_deltas(bias_deltas, amplification_factor):
-#     amplified_deltas = []
-#     for delta in bias_deltas:
-#         amplified_delta = np.exp(amplification_factor * delta) - 1
-#         amplified_deltas.append(amplified_delta)
-#     return amplified_deltas
+print(member_vectors[0])
+print(non_member_vectors[0])
+import matplotlib.pyplot as plt
+import numpy as np
 
-# # Create a figure to plot bias changes for different amplification factors
+# Assume attack_vectors and labels are numpy arrays
+member_features = attack_vectors[np.array(attack_labels) == 1]
+non_member_features = attack_vectors[np.array(attack_labels) == 0]
+print(member_features == non_member_features)
+# Plot the distribution of member features
+plt.figure(figsize=(10, 5))
+plt.hist(member_features.flatten(), bins=50, alpha=0.7, color="blue")
+plt.title("Distribution of Attack Features: Members")
+plt.xlabel("Feature Value")
+plt.ylabel("Frequency")
+plt.grid(True)
+plt.show()
+
+# Plot the distribution of non-member features
+plt.figure(figsize=(10, 5))
+plt.hist(non_member_features.flatten(), bins=50, alpha=0.7, color="orange")
+plt.title("Distribution of Attack Features: Non-Members")
+plt.xlabel("Feature Value")
+plt.ylabel("Frequency")
+plt.grid(True)
+plt.show()
+from scipy.stats import ks_2samp
+
+# Flatten the features for comparison
+member_features_flat = member_features.flatten()
+non_member_features_flat = non_member_features.flatten()
+
+# Perform the KS test
+ks_stat, p_value = ks_2samp(member_features_flat, non_member_features_flat)
+
+print(f"KS Statistic: {ks_stat}")
+print(f"P-value: {p_value}")
+
+if p_value < 0.05:
+    print("The distributions are significantly different (p < 0.05).")
+else:
+    print("The distributions are not significantly different (p >= 0.05).")
+
+
+def amplify_bias_deltas(bias_deltas, amplification_factor):
+    amplified_deltas = []
+    for delta in bias_deltas:
+        amplified_delta = np.exp(amplification_factor * delta) - 1
+        amplified_deltas.append(amplified_delta)
+    return amplified_deltas
+
+# Create a figure to plot bias changes for different amplification factors
 # plt.figure(figsize=(15, len(amplification_factors) * 4))
 
         
-# for idx, factor in enumerate(amplification_factors):
-#     # Amplify the bias changes using the given amplification factor
-#     amplified_deltas = amplify_bias_deltas(member_vectors[:1000].flatten(), factor)
-#     #amplified_deltas_array = np.concatenate(amplified_deltas)  # Flatten to get a 1D array for distribution
 
-#     # Plot the histogram for the current amplification factor
-#     plt.subplot(len(amplification_factors), 1, idx + 1)
-#     plt.hist(amplified_deltas, bins=30, alpha=0.7, color='b')
-#     plt.title(f"Histogram of Bias Changes (Amplification Factor = {factor})")
-#     plt.xlabel("Bias Change Value")
-#     plt.ylabel("Frequency")
-# plt.tight_layout()
-# plt.show()
 # Split the attack dataset into training and validation sets (80% train, 20% validation)
-X_train, X_val, y_train, y_val = train_test_split(attack_vectors, attack_labels, test_size=0.2, random_state=42)
+amplified_deltas = amplify_bias_deltas(attack_vectors, 100)
+#     #amplified_deltas_array = np.concatenate(amplified_deltas)
+X_train, X_val, y_train, y_val = train_test_split(amplified_deltas, attack_labels, test_size=0.2, random_state=10)
 
 # Convert to PyTorch tensors
 X_train_tensor = torch.tensor(X_train, dtype=torch.float32)
 y_train_tensor = torch.tensor(y_train, dtype=torch.float32)  # Use float type for BCELoss
 X_val_tensor = torch.tensor(X_val, dtype=torch.float32)
 y_val_tensor = torch.tensor(y_val, dtype=torch.float32)  # Use float type for BCELoss
-print(len(X_train_tensor[0]))
+
 # DataLoader setup
 train_loader = DataLoader(TensorDataset(X_train_tensor, y_train_tensor), batch_size=64, shuffle=True)
 val_loader = DataLoader(TensorDataset(X_val_tensor, y_val_tensor), batch_size=64)
@@ -73,8 +104,7 @@ class AttackModel(nn.Module):
         self.pool = nn.MaxPool1d(kernel_size=2, stride=2)
         
         # Fully Connected Layers
-        #self.fc1 = nn.Linear(64 * 100, 128)  # Adjusted for input size 800
-        self.fc1 = nn.Linear(64 * 112, 128)  # Adjust input size after convolution and pooling
+        self.fc1 = nn.Linear(64 * 112, 128) 
         self.fc2 = nn.Linear(128, 64)
         self.fc3 = nn.Linear(64, 1)  # Single output node for binary classification
         
