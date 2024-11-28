@@ -140,7 +140,7 @@ class MaliciousFlowerClient(fl.client.NumPyClient):
         
         # Save the model state before training
 
-        pre_training_file = f"snaphot__{config['round']*5}.pth"
+        pre_training_file = f"snaphot__{config['round']}.pth"
         torch.save(self.model.state_dict(), pre_training_file)
         log(INFO, f"Saved pre-training model state to {pre_training_file}")
         
