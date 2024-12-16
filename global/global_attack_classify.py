@@ -4,7 +4,7 @@ import logging
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
-
+num_epochs = 5 #### for filename stuff
 
 def classify_source(attack_vector, amplification_factor):
     num_clients, num_epochs, num_nodes = attack_vector.shape
@@ -38,8 +38,8 @@ def classify_source(attack_vector, amplification_factor):
 
 
 # Load data
-attack_vectors = np.load("global_attack_vectors5.npy")[-1500:]
-attack_labels = np.load("global_attack_labels5.npy")[-1500:]
+attack_vectors = np.load("global_attack_vectors5.npy")
+attack_labels = np.load("global_attack_labels5.npy")
 logger.info(f"Loaded attack vectors with shape {attack_vectors.shape}")
 
 # Test different amplification factors
